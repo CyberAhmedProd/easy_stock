@@ -1,11 +1,10 @@
 package com.teamyostrik.easystock.models;
 
-import java.util.List;
-
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,15 +15,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Entity
-@Table(name ="categorie")
-public class Categorie extends AbstractEntity{
-
-	@Column(name = "code_categorie")
-	private String codeCategorie;
-	@Column(name = "designation")
-	private String designation	;
+@Embeddable
+public class Adresse{
 	
-	@OneToMany(mappedBy= "category")
-	private List<Article> articles;
+	@Column(name = "adresse1")
+	private String adresse1;
+	@Column(name = "adresse2")
+	private String adresse2;
+	@Column(name = "ville")
+	private String ville;
+	@Column(name = "code_potale")
+	private String codePotale;
+	@Column(name = "pays")
+	private String pays;
+
 }
