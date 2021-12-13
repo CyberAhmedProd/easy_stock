@@ -1,7 +1,8 @@
 package com.teamyostrik.easystock.models;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.Instant;
+
 
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
@@ -30,12 +31,12 @@ public class AbstractEntity implements Serializable{
 	@CreatedDate
 	@Column(name = "creationDate", nullable = false)
 	@JsonIgnore
-	private Date creationDate;
+	private Instant creationDate;
 	
 	@LastModifiedDate
 	@Column(name = "lastUpdateDate")
 	@JsonIgnore
-	private Date lastUpdateDate;
+	private Instant lastUpdateDate;
 	
 
 }

@@ -1,6 +1,8 @@
 package com.teamyostrik.easystock.models;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -15,5 +17,12 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name ="ligne_commande_client")
 public class LigneCommandeClient extends AbstractEntity{
-
+	
+	@ManyToOne
+	@JoinColumn(name ="id_article")
+	private Article article;
+	@ManyToOne
+	@JoinColumn(name ="id_commnde_client")
+	private CommandeClient commandeClient;
+	
 }
