@@ -1,13 +1,15 @@
 package com.teamyostrik.easystock.dto;
 
-import com.teamyostrik.easystock.models.Article;
-import com.teamyostrik.easystock.models.CommandeClient;
+import lombok.Builder;
+import lombok.Data;
 
+@Data
+@Builder
 public class LigneCommandeClientDto {
+	private Integer id;
+	private ArticleDto article;
 
-	private Article article;
-
-	private CommandeClient commandeClient;
+	private CommandeClientDto commandeClient;
 	
 	private float quantite;
 	

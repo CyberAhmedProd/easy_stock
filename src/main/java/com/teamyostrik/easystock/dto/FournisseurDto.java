@@ -1,16 +1,18 @@
 package com.teamyostrik.easystock.dto;
 
 import java.util.List;
-import com.teamyostrik.easystock.models.Adresse;
-import com.teamyostrik.easystock.models.CommandeFournisseur;
+import lombok.Builder;
+import lombok.Data;
 
+@Data
+@Builder
 public class FournisseurDto {
-	
+	private Integer id;
 	private String nomClient;
 	
 	private String prenomClient;
 	
-	private Adresse adresse;
+	private AdresseDto adresse;
 	
 	private String photo;
 
@@ -18,5 +20,5 @@ public class FournisseurDto {
 	
 	private String numTel;
 	
-	private List<CommandeFournisseur> commandeFournisseurs;
+	private List<CommandeFournisseurDto> commandeFournisseurs;
 }

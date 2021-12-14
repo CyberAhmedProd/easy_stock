@@ -2,13 +2,15 @@ package com.teamyostrik.easystock.dto;
 
 import java.time.Instant;
 import java.util.List;
-import com.teamyostrik.easystock.models.Client;
-import com.teamyostrik.easystock.models.LigneCommandeClient;
+import lombok.Builder;
+import lombok.Data;
 
+@Data
+@Builder
 public class CommandeClientDto {
-
+	private Integer id;
 	private String codeCommandeClient;
 	private Instant dateCommande;
-	private Client client;
-	private List<LigneCommandeClient> ligneCommandeClients;
+	private ClientDto client;
+	private List<LigneCommandeClientDto> ligneCommandeClients;
 }

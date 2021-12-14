@@ -1,13 +1,15 @@
 package com.teamyostrik.easystock.dto;
 
-import com.teamyostrik.easystock.models.Article;
-import com.teamyostrik.easystock.models.CommandeFournisseur;
+import lombok.Builder;
+import lombok.Data;
 
+@Data
+@Builder
 public class LigneCommandeFournisseurDto {
+	private Integer id;
+	private ArticleDto article;
 
-	private Article article;
-
-	private CommandeFournisseur commandeFournisseurs;
+	private CommandeFournisseurDto commandeFournisseurs;
 	
 	private float quantite;
 	

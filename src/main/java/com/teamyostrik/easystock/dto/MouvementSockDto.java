@@ -1,12 +1,17 @@
 package com.teamyostrik.easystock.dto;
 
 import java.time.Instant;
-import com.teamyostrik.easystock.models.Article;
+
 import com.teamyostrik.easystock.models.TypeMouvement;
 
-public class MouvementSockDto {
+import lombok.Builder;
+import lombok.Data;
 
-	private Article article;
+@Data
+@Builder
+public class MouvementSockDto {
+	private Integer id;
+	private ArticleDto article;
 	
 	private Instant dateMouvement;
 	

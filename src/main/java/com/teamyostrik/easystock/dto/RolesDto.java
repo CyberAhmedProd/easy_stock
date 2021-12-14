@@ -5,11 +5,9 @@ import lombok.Data;
 
 @Data
 @Builder
-public class LigneVenteDto {
+public class RolesDto {
 	private Integer id;
-	private VenteDto vente;
-
-	private float quantite;
+	private String roleName;
 	
-	private float prixUnitiare;
+	private UtilisateurDto utilisateur;
 }

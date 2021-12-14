@@ -1,9 +1,13 @@
 package com.teamyostrik.easystock.dto;
 
-import com.teamyostrik.easystock.models.Categorie;
+import lombok.Builder;
+import lombok.Data;
 
+@Data
+@Builder
 public class ArticleDto {
 	
+	private Integer id;
 
 	private String codeArticle;
 	
@@ -17,6 +21,7 @@ public class ArticleDto {
 	
 	private String photo;
 	
-	private Categorie category;
+	private CategorieDto category;
+	
 	
 }

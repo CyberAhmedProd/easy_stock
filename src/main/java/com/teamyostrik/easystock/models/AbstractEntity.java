@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import lombok.Builder;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -27,7 +28,6 @@ public class AbstractEntity implements Serializable{
 	@Id
 	@GeneratedValue
 	private Integer id;
-	
 	@CreatedDate
 	@Column(name = "creationDate", nullable = false)
 	@JsonIgnore
@@ -37,6 +37,6 @@ public class AbstractEntity implements Serializable{
 	@Column(name = "lastUpdateDate")
 	@JsonIgnore
 	private Instant lastUpdateDate;
-	
+
 
 }
