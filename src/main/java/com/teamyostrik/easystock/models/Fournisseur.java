@@ -22,6 +22,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name ="Fournisseur")
 public class Fournisseur extends AbstractEntity{
+	
 	@Column(name = "nom_client")
 	private String nomClient;
 	@Column(name = "prenom_client")
@@ -34,7 +35,6 @@ public class Fournisseur extends AbstractEntity{
 	private String email;
 	@Column(name = "num_tel")
 	private String numTel;
-	
 	@OneToMany(mappedBy = "fournisseur")
 	private List<CommandeFournisseur> commandeFournisseurs;
 }

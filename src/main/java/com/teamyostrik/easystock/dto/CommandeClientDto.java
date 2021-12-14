@@ -2,7 +2,6 @@ package com.teamyostrik.easystock.dto;
 
 import java.time.Instant;
 import java.util.List;
-
 import com.teamyostrik.easystock.models.Client;
 import com.teamyostrik.easystock.models.LigneCommandeClient;
 

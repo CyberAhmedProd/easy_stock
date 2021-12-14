@@ -1,7 +1,6 @@
 package com.teamyostrik.easystock.dto;
 
 import java.util.List;
-
 import com.teamyostrik.easystock.models.Article;
 
 public class CategorieDto {
