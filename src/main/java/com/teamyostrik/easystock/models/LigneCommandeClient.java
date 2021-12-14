@@ -1,5 +1,6 @@
 package com.teamyostrik.easystock.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -26,5 +27,11 @@ public class LigneCommandeClient extends AbstractEntity{
 	@ManyToOne
 	@JoinColumn(name ="id_commnde_client")
 	private CommandeClient commandeClient;
+	
+	@Column(name = "quantite")
+	private float quantite;
+	
+	@Column(name = "prix_unitaire")
+	private float prixUnitiare;
 	
 }

@@ -1,5 +1,8 @@
 package com.teamyostrik.easystock.models;
 
+import java.time.Instant;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,4 +26,15 @@ public class MouvementSock extends AbstractEntity{
 	@ManyToOne
 	@JoinColumn(name = "id_article")
 	private Article article;
+	
+	@Column(name = "date_mouvement")
+	private Instant dateMouvement;
+	
+	@Column(name = "quantite")
+	private float quantite;
+	 
+	@Column(name ="type_mouvement")
+	private TypeMouvement typeMouvement; 
+	
+	
 }

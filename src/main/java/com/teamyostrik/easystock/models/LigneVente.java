@@ -24,5 +24,9 @@ public class LigneVente extends AbstractEntity{
 	@ManyToOne
 	@JoinColumn(name = "id_vente")
 	private Vente vente;
-	private float quantites;
+	@Column(name = "quantite")
+	private float quantite;
+	
+	@Column(name = "prix_unitaire")
+	private float prixUnitiare;
 }
