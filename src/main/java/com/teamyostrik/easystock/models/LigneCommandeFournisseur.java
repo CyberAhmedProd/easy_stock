@@ -1,6 +1,9 @@
 package com.teamyostrik.easystock.models;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -15,5 +18,11 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name ="ligne_commande_fournisseur")
 public class LigneCommandeFournisseur extends AbstractEntity{
-
+	
+	@ManyToOne
+	@JoinColumn(name ="id_article")
+	private Article article;
+	@ManyToOne
+	@JoinColumn(name = "id_commande_fournisseur")
+	private CommandeFournisseur commandeFournisseurs;
 }
