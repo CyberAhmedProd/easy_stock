@@ -12,6 +12,15 @@ public class UtilisateurValidator {
     {
         List<String> errors = new ArrayList<>();
 
+        if(utilisateurDto == null)
+        {
+            errors.add("Veuillez renseigner le nom d'utilisateur");
+            errors.add("Veuillez renseigner le prénom d'utilisateur");
+            errors.add("Veuillez renseigner le mot de passe d'utilisateur");
+            errors.add("Veuillez renseigner l'adresse d'utilisateur");
+            return errors;
+        }
+
         if(!StringUtils.hasLength(utilisateurDto.getNom()))
         {
             errors.add("Veuillez renseigner le nom d'utilisateur");
@@ -21,9 +30,13 @@ public class UtilisateurValidator {
         {
             errors.add("Veuillez renseigner le prénom d'utilisateur");
         }
-        if(!StringUtils.hasLength(utilisateurDto.getMotDePasse()))
+        if(!StringUtils.hasLength(utilisateurDto.getEmail()))
         {
             errors.add("Veuillez renseigner un mot de pass d'utilisateur");
+        }
+        if(utilisateurDto.getDateNaissance() == null)
+        {
+            errors.add("Veuillez renseigner la date de naissance d'utilisateur");
         }
         if(utilisateurDto.getAdresse() == null)
         {
@@ -42,6 +55,10 @@ public class UtilisateurValidator {
             if(!StringUtils.hasLength(utilisateurDto.getAdresse().getCodePotale()))
             {
                 errors.add("le champs Code postale est obligatoire");
+            }
+            if(!StringUtils.hasLength(utilisateurDto.getAdresse().getPays()))
+            {
+                errors.add("le champs Pays   est obligatoire");
             }
         }
         return  errors;
