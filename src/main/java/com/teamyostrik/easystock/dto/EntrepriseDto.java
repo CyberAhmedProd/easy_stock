@@ -1,6 +1,10 @@
 package com.teamyostrik.easystock.dto;
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.teamyostrik.easystock.models.Adresse;
+import com.teamyostrik.easystock.models.Entreprise;
 import lombok.Builder;
 import lombok.Data;
 
@@ -22,6 +26,48 @@ public class EntrepriseDto {
 	private String numTel;
 	
 	private String siteWeb;
-	
+
+	@JsonIgnore
 	private List<UtilisateurDto> utilisateurs;
+
+	public static EntrepriseDto fromEntity(Entreprise entreprise)
+	{
+		if(entreprise == null)
+		{
+			return null;
+		}
+		return EntrepriseDto.builder()
+				.nom(entreprise.getNom())
+				.designation(entreprise.getDesignation())
+				.adresse(AdresseDto.fromEntity(entreprise.getAdresse()))
+				.email(entreprise.getEmail())
+				.numTel(entreprise.getNumTel())
+				.siteWeb(entreprise.getSiteWeb())
+				.photo(entreprise.getPhoto())
+				.build();
+	}
+
+	public static Entreprise toEntity(EntrepriseDto entrepriseDto)
+	{
+		if(entrepriseDto == null)
+		{
+			return null;
+		}
+		Entreprise entreprise = new Entreprise();
+		entreprise.setNom(entrepriseDto.getNom());
+		entreprise.setDesignation(entrepriseDto.getDesignation());
+		entreprise.setPhoto(entrepriseDto.getPhoto());
+		entreprise.setNumTel(entrepriseDto.getNumTel());
+		entreprise.setSiteWeb(entrepriseDto.getSiteWeb());
+		entreprise.setEmail(entrepriseDto.getEmail());
+		Adresse adresse = new Adresse();
+		adresse.setAdresse1(entrepriseDto.getAdresse().getAdresse1());
+		adresse.setAdresse2(entrepriseDto.getAdresse().getAdresse2());
+		adresse.setVille(entrepriseDto.getAdresse().getVille());
+		adresse.setPays(entrepriseDto.getAdresse().getPays());
+		adresse.setCodePotale(entrepriseDto.getAdresse().getCodePotale());
+		entreprise.setAdresse(adresse);
+		return entreprise;
+
+	}
 }
