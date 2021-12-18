@@ -60,13 +60,7 @@ public class FournisseurDto {
 		fournisseur.setEmail(fournisseurDto.getEmail());
 		fournisseur.setNumTel(fournisseurDto.getNumTel());
 		fournisseur.setPhoto(fournisseurDto.getPhoto());
-		Adresse adresse = new Adresse();
-		adresse.setAdresse1(fournisseurDto.getAdresse().getAdresse1());
-		adresse.setAdresse2(fournisseurDto.getAdresse().getAdresse2());
-		adresse.setVille(fournisseurDto.getAdresse().getVille());
-		adresse.setPays(fournisseurDto.getAdresse().getPays());
-		adresse.setCodePotale(fournisseurDto.getAdresse().getCodePotale());
-		fournisseur.setAdresse(adresse);
+		fournisseur.setAdresse(AdresseDto.toEntity(fournisseurDto.getAdresse()));
 		return fournisseur;
 	}
 }

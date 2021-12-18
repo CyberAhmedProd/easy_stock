@@ -33,7 +33,6 @@ public class VenteDto {
 		{
 			return null;
 		}
-
 		Vente vente = new Vente();
 		vente.setCode(venteDto.getCode());
 		vente.setCommentaire(venteDto.getCommentaire());
