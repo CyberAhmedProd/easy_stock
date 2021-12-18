@@ -1,9 +1,7 @@
 package com.teamyostrik.easystock.validators;
 
-import com.teamyostrik.easystock.dto.ClientDto;
 import com.teamyostrik.easystock.dto.FournisseurDto;
 import org.springframework.util.StringUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 

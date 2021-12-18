@@ -32,6 +32,7 @@ public class ArticleDto {
 			return null;
 		}
 		return ArticleDto.builder()
+				.id(article.getId())
 				.codeArticle(article.getCodeArticle())
 				.designation(article.getDesignation())
 				.prixUnitaireHT(article.getPrixUnitaireHT())

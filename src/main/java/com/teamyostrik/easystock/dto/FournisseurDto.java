@@ -34,6 +34,7 @@ public class FournisseurDto {
 			return null;
 		}
 		return FournisseurDto.builder()
+				.id(fournisseur.getId())
 				.nomClient(fournisseur.getNomClient())
 				.prenomClient(fournisseur.getPrenomClient())
 				.adresse(AdresseDto.fromEntity(fournisseur.getAdresse()))

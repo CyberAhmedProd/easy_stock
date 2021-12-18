@@ -37,6 +37,7 @@ public class EntrepriseDto {
 			return null;
 		}
 		return EntrepriseDto.builder()
+				.id(entreprise.getId())
 				.nom(entreprise.getNom())
 				.designation(entreprise.getDesignation())
 				.adresse(AdresseDto.fromEntity(entreprise.getAdresse()))

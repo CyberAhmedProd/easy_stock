@@ -34,6 +34,8 @@ public class Utilisateur extends AbstractEntity{
 	private Instant DateNaissance;
 	@Column(name = "mot_de_passe")
 	private String motDePasse;
+	@Column(name = "email")
+	private String email;
 	@Embedded
 	private Adresse adresse;
 	@Column(name ="photo")

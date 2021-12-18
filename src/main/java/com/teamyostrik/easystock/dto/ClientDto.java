@@ -27,6 +27,7 @@ public class ClientDto {
 			return null;
 		}
 		return ClientDto.builder()
+				.id(client.getId())
 				.nomClient(client.getNomClient())
 				.prenomClient(client.getPrenomClient())
 				.adresse(AdresseDto.fromEntity(client.getAdresse()))
@@ -36,29 +37,20 @@ public class ClientDto {
 				.email(client.getEmail())
 				.numTel(client.getNumTel())
 				.build();
-
 	}
-
 	public static Client toEntity(ClientDto clientDto)
 	{
 		if(clientDto == null)
 		{
 			return null;
 		}
-
 		Client client = new Client();
 		client.setNomClient(clientDto.getNomClient());
 		client.setPrenomClient(clientDto.getPrenomClient());
 		client.setEmail(clientDto.getEmail());
 		client.setNumTel(clientDto.getNumTel());
 		client.setPhoto(clientDto.getPhoto());
-		Adresse adresse = new Adresse();
-		adresse.setAdresse1(clientDto.getAdresse().getAdresse1());
-		adresse.setAdresse2(clientDto.getAdresse().getAdresse2());
-		adresse.setVille(clientDto.getAdresse().getVille());
-		adresse.setPays(clientDto.getAdresse().getPays());
-		adresse.setCodePotale(clientDto.getAdresse().getCodePotale());
-		client.setAdresse(adresse);
+		client.setAdresse(AdresseDto.toEntity(clientDto.getAdresse()));
 		return client;
 	}
 }
