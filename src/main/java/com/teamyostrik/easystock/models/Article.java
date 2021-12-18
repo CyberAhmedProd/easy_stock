@@ -20,8 +20,9 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name ="article")
 public class Article extends AbstractEntity{
-	
-	
+
+	@Column(name ="id_entreprise")
+	private Integer IdEntreprise;
 	@Column(name = "code_article")
 	private String codeArticle;
 	@Column(name = "designation")

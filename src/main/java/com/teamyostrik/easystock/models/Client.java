@@ -22,8 +22,9 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name ="client")
 public class Client extends AbstractEntity{
-	
-	
+
+	@Column(name ="id_entreprise")
+	private Integer IdEntreprise;
 	@Column(name = "nom_client")
 	private String nomClient;
 	@Column(name = "prenom_client")
