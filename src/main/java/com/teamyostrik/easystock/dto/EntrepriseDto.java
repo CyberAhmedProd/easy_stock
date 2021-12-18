@@ -3,7 +3,6 @@ package com.teamyostrik.easystock.dto;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.teamyostrik.easystock.models.Adresse;
 import com.teamyostrik.easystock.models.Entreprise;
 import lombok.Builder;
 import lombok.Data;
@@ -61,13 +60,7 @@ public class EntrepriseDto {
 		entreprise.setNumTel(entrepriseDto.getNumTel());
 		entreprise.setSiteWeb(entrepriseDto.getSiteWeb());
 		entreprise.setEmail(entrepriseDto.getEmail());
-		Adresse adresse = new Adresse();
-		adresse.setAdresse1(entrepriseDto.getAdresse().getAdresse1());
-		adresse.setAdresse2(entrepriseDto.getAdresse().getAdresse2());
-		adresse.setVille(entrepriseDto.getAdresse().getVille());
-		adresse.setPays(entrepriseDto.getAdresse().getPays());
-		adresse.setCodePotale(entrepriseDto.getAdresse().getCodePotale());
-		entreprise.setAdresse(adresse);
+		entreprise.setAdresse(AdresseDto.toEntity(entrepriseDto.getAdresse()));
 		return entreprise;
 
 	}

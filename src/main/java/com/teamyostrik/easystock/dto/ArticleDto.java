@@ -56,11 +56,7 @@ public class ArticleDto {
 		article.setTauxTVA(articleDto.getTauxTVA());
 		article.setPrixUnitaireTTC(articleDto.getPrixUnitaireTTC());
 		article.setPhoto(articleDto.getPhoto());
-		Categorie categorie = new Categorie();
-		categorie.setId(articleDto.getCategory().getId());
-		categorie.setCodeCategorie(articleDto.getCodeArticle());
-		categorie.setDesignation(articleDto.getDesignation());
-		article.setCategory(categorie);
+		article.setCategory(CategorieDto.toEntity(articleDto.getCategory()));
 		return article;
 	}
 	

@@ -35,8 +35,8 @@ public class FournisseurDto {
 		}
 		return FournisseurDto.builder()
 				.id(fournisseur.getId())
-				.nomClient(fournisseur.getNomClient())
-				.prenomClient(fournisseur.getPrenomClient())
+				.nomClient(fournisseur.getNomFournisseur())
+				.prenomClient(fournisseur.getPrenomFournisseur())
 				.adresse(AdresseDto.fromEntity(fournisseur.getAdresse()))
 				.photo(fournisseur.getPhoto())
 				// add method from entity to commande client
@@ -53,10 +53,9 @@ public class FournisseurDto {
 		{
 			return null;
 		}
-
 		Fournisseur fournisseur = new Fournisseur();
-		fournisseur.setNomClient(fournisseurDto.getNomClient());
-		fournisseur.setPrenomClient(fournisseurDto.getPrenomClient());
+		fournisseur.setNomFournisseur(fournisseurDto.getNomClient());
+		fournisseur.setPrenomFournisseur(fournisseurDto.getPrenomClient());
 		fournisseur.setEmail(fournisseurDto.getEmail());
 		fournisseur.setNumTel(fournisseurDto.getNumTel());
 		fournisseur.setPhoto(fournisseurDto.getPhoto());

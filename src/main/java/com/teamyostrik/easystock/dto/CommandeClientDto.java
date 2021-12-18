@@ -42,6 +42,7 @@ public class CommandeClientDto {
 		CommandeClient commandeClient = new CommandeClient();
 		commandeClient.setCodeCommandeClient(commandeClientDto.getCodeCommandeClient());
 		commandeClient.setClient(ClientDto.toEntity(commandeClientDto.getClient()));
+		commandeClient.setDateCommande(commandeClientDto.getDateCommande());
 		return commandeClient;
 	}
 

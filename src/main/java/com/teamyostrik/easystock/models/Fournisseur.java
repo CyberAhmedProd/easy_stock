@@ -23,10 +23,10 @@ import lombok.NoArgsConstructor;
 @Table(name ="Fournisseur")
 public class Fournisseur extends AbstractEntity{
 	
-	@Column(name = "nom_client")
-	private String nomClient;
-	@Column(name = "prenom_client")
-	private String prenomClient;
+	@Column(name = "nom_fournisseur")
+	private String nomFournisseur;
+	@Column(name = "prenom_fournisseur")
+	private String prenomFournisseur;
 	@Embedded
 	private Adresse adresse;
 	@Column(name = "photo")
