@@ -22,7 +22,6 @@ public class UtilisateurDto {
 	private String photo;
 	private EntrepriseDto entreprise;
 	private List<RolesDto> roles;
-
 	public static UtilisateurDto fromEntity(Utilisateur utilisateur)
 	{
 		if(utilisateur == null)

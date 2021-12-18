@@ -31,7 +31,6 @@ public class LigneVenteDto {
 		{
 			return null;
 		}
-
 		LigneVente ligneVente = new LigneVente();
 		ligneVente.setQuantite(ligneVenteDto.getQuantite());
 		ligneVente.setQuantite(ligneVenteDto.getQuantite());
