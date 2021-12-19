@@ -36,7 +36,6 @@ public class CategorieServiceImpl implements CategorieService {
                 categorieRepository.save(CategorieDto.toEntity(categorieDto))
         );
     }
-
     @Override
     public CategorieDto findById(Integer id) {
         if(id == null)
@@ -51,7 +50,6 @@ public class CategorieServiceImpl implements CategorieService {
                         ErrorCode.CATEGORY_NOT_FOUND)
         );
     }
-
     @Override
     public CategorieDto findByCodeArticle(String codeCategorie) {
         if(!StringUtils.hasLength(codeCategorie))
@@ -66,14 +64,12 @@ public class CategorieServiceImpl implements CategorieService {
                         ErrorCode.CATEGORY_NOT_FOUND)
         );
     }
-
     @Override
     public List<CategorieDto> findAll() {
         return  categorieRepository.findAll().stream()
                 .map(CategorieDto::fromEntity)
                 .collect(Collectors.toList());
     }
-
     @Override
     public void delete(Integer id) {
         if(id == null)
