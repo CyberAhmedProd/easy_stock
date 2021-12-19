@@ -27,8 +27,6 @@ public class ArticleController implements ArticleApi {
         categorie.setDesignation("cat");
         categorie.setCreationDate(Instant.now());
         categorie.setLastUpdateDate(Instant.now());
-
-
         article.setCreationDate(Instant.now());
         article.setCategory(CategorieDto.fromEntity(categorieRepository.save(categorie)));
         return articleService.save(article);

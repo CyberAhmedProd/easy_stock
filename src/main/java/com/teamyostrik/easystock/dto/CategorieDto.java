@@ -13,9 +13,7 @@ public class CategorieDto {
 
 	private Integer id;
 	private String codeCategorie;
-
 	private String designation	;
-
 	@JsonIgnore
 	private List<ArticleDto> articles;
 
