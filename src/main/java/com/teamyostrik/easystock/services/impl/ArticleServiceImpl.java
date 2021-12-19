@@ -52,7 +52,6 @@ public class ArticleServiceImpl implements ArticleService {
                         ErrorCode.ARTICLE_NOT_FOUND)
                 );
     }
-
     @Override
     public ArticleDto findByCodeArticle(String codeArticle) {
        if(!StringUtils.hasLength(codeArticle))
@@ -67,16 +66,19 @@ public class ArticleServiceImpl implements ArticleService {
                         ErrorCode.ARTICLE_NOT_FOUND)
         );
     }
-
     @Override
     public List<ArticleDto> findAll() {
         return  articleRepository.findAll().stream()
                 .map(ArticleDto::fromEnity)
                 .collect(Collectors.toList());
     }
-
     @Override
     public void delete(Integer id) {
-
+        if(id == null)
+        {
+            log.error("Article ID is null");
+            return;
+        }
+        articleRepository.deleteById(id);
     }
 }
