@@ -5,12 +5,14 @@ import com.teamyostrik.easystock.models.Categorie;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.Instant;
+
 @Data
 @Builder
 public class ArticleDto {
 	
 	private Integer id;
-
+	private Instant creationDate;
 	private String codeArticle;
 	
 	private String designation	;
@@ -33,6 +35,7 @@ public class ArticleDto {
 		}
 		return ArticleDto.builder()
 				.id(article.getId())
+				.creationDate(article.getCreationDate())
 				.codeArticle(article.getCodeArticle())
 				.designation(article.getDesignation())
 				.prixUnitaireHT(article.getPrixUnitaireHT())
@@ -50,6 +53,7 @@ public class ArticleDto {
 			return null;
 		}
 		Article article = new Article();
+		article.setCreationDate(articleDto.getCreationDate());
 		article.setCodeArticle(articleDto.getCodeArticle());
 		article.setDesignation(articleDto.getDesignation());
 		article.setPrixUnitaireHT(articleDto.getPrixUnitaireHT());

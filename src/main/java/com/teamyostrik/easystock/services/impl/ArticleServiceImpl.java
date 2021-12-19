@@ -30,7 +30,7 @@ public class ArticleServiceImpl implements ArticleService {
         if(!errors.isEmpty())
         {
             log.error("Article is not valid {}", articleDto);
-            throw new EntityNotFoundExceptions("L'article n'est pas valide" , (Throwable) errors, ErrorCode.ARTICLE_NOT_VALID );
+            throw new EntityNotFoundExceptions("L'article n'est pas valide" ,  ErrorCode.ARTICLE_NOT_VALID );
         }
 
         return articleDto.fromEnity(

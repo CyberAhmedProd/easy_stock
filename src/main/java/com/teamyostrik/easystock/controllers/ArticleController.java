@@ -1,41 +1,60 @@
 package com.teamyostrik.easystock.controllers;
 
-
+import com.teamyostrik.easystock.controllers.api.ArticleApi;
 import com.teamyostrik.easystock.dto.ArticleDto;
-import com.teamyostrik.easystock.models.Article;
+import com.teamyostrik.easystock.dto.CategorieDto;
+import com.teamyostrik.easystock.models.Categorie;
+import com.teamyostrik.easystock.repository.CategorieRepository;
 import com.teamyostrik.easystock.services.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import com.teamyostrik.easystock.utils.Constants;
+
+import java.time.Instant;
 import java.util.List;
+
 @RestController
-public class ArticleController {
+public class ArticleController implements ArticleApi {
+
     @Autowired
     private ArticleService articleService;
-    @PostMapping(value = Constants.APP_ROOT+"article/create",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ArticleDto save(Article article)
-    {
-        
-        Article testArticle1 = new Article();
-        testArticle1.setId(12);
-        testArticle1.setCodeArticle("55ARTt");
-        testArticle1.setDesignation("Hello");
-        return ArticleDto.fromEnity(testArticle1);
-    }
-    @GetMapping(value = Constants.APP_ROOT+"article/{id_article}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ArticleDto getArticle()
-    {
-        return null;
-    }
-    @GetMapping(value = Constants.APP_ROOT+"article", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<ArticleDto> getAll()
-    {
-        return null;
-    }
-    @PutMapping(value = Constants.APP_ROOT+"article/{id}",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ArticleDto update(@RequestParam Integer id , ArticleDto articleDto) {return null;}
-    @DeleteMapping(value = Constants.APP_ROOT+"article/{id}")
-    public void delete(@RequestParam Integer id) {}
+    @Autowired
+    private CategorieRepository categorieRepository;
 
+    @Override
+    public ArticleDto save(ArticleDto article) {
+        Categorie categorie = new Categorie();
+        categorie.setCodeCategorie("cat14");
+        categorie.setDesignation("cat");
+        categorie.setCreationDate(Instant.now());
+        categorie.setLastUpdateDate(Instant.now());
+
+
+        article.setCreationDate(Instant.now());
+        article.setCategory(CategorieDto.fromEntity(categorieRepository.save(categorie)));
+        return articleService.save(article);
+    }
+
+    @Override
+    public ArticleDto getArticleById(Integer idArticle) {
+        return articleService.findById(idArticle);
+    }
+
+    @Override
+    public ArticleDto getArticleByCode(String codeArticle) {
+        return articleService.findByCodeArticle(codeArticle);
+    }
+
+    @Override
+    public List<ArticleDto> getAll() {
+        return articleService.findAll();
+    }
+    // to do near future
+    @Override
+    public ArticleDto update(Integer idArticle, ArticleDto article) {
+        return null;
+    }
+    @Override
+    public void delete(Integer idArticle) {
+        articleService.delete(idArticle);
+    }
 }
