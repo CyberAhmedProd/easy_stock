@@ -1,6 +1,9 @@
 package com.teamyostrik.easystock.exceptions;
 
+import lombok.Getter;
+
 public class EntityNotFoundExceptions extends RuntimeException{
+    @Getter
     private ErrorCode errorCode;
     public EntityNotFoundExceptions(String messsage)
     {
