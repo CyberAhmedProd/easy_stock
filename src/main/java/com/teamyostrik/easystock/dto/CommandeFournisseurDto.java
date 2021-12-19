@@ -3,8 +3,9 @@ package com.teamyostrik.easystock.dto;
 import java.time.Instant;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.teamyostrik.easystock.models.CommandeFournisseur;
-import jdk.nashorn.internal.ir.annotations.Ignore;
+
 import lombok.Builder;
 import lombok.Data;
 
@@ -15,7 +16,7 @@ public class CommandeFournisseurDto {
 	private String codeCommande;
 	private Instant dateCommande;
 	private FournisseurDto fournisseur;
-	@Ignore
+	@JsonIgnore
 	private List<LigneCommandeFournisseurDto> ligneCommandeFournisseurs;
 
 	public static CommandeFournisseurDto fromEntity(CommandeFournisseur commandeFournisseur)
