@@ -1,7 +1,10 @@
 package com.teamyostrik.easystock.services;
 
 import com.teamyostrik.easystock.dto.ArticleDto;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
+
 
 public interface ArticleService {
     ArticleDto save(ArticleDto articleDto);

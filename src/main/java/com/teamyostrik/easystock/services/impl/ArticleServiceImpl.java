@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-@Service("ArticleServiceImpl")
+@Service
 @Slf4j
 public class ArticleServiceImpl implements ArticleService {
     @Autowired

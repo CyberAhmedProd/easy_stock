@@ -22,14 +22,16 @@ public class ArticleController {
     {
         return null;
     }
-    @GetMapping(value = Constants.APP_ROOT+"/article",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = Constants.APP_ROOT+"/article", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ArticleDto> getAll()
     {
         return null;
     }
     @PutMapping(value = Constants.APP_ROOT+"/article/{id}",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ArticleDto update(){
+    public ArticleDto update(@RequestParam Integer id , ArticleDto articleDto)
+    {
         return null;
+
     }
     @DeleteMapping(value = Constants.APP_ROOT+"/article/{id}")
     public void delete(@RequestParam Integer id)
