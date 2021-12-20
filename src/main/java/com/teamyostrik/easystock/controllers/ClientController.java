@@ -22,10 +22,6 @@ public class ClientController implements ClientApi {
         return clientService.findById(id);
     }
 
-    @Override
-    public ClientDto getByCode(String codeClient) {
-        return clientService.findByCodeClient(codeClient);
-    }
 
     @Override
     public List<ClientDto> getAll() {

@@ -43,7 +43,7 @@ public class CategorieServiceImpl implements CategorieService {
             log.error("Article id is null");
             return null;
         }
-        Optional<Categorie> categorie = categorieRepository.findCategorieById(id);
+        Optional<Categorie> categorie = categorieRepository.findById(id);
         return Optional.of(CategorieDto.fromEntity(categorie.get())).orElseThrow(() ->
                 new EntityNotFoundExceptions("Aucune categorie avec l'id= "+ id
                         + " n'est été trouver dans la bd",
@@ -54,10 +54,10 @@ public class CategorieServiceImpl implements CategorieService {
     public CategorieDto findByCodeArticle(String codeCategorie) {
         if(!StringUtils.hasLength(codeCategorie))
         {
-            log.error("Article Code is null");
+            log.error("Categorie Code is null");
             return null;
         }
-        Optional<Categorie> categorie = categorieRepository.findCategorieByCodeCategory(codeCategorie);
+        Optional<Categorie> categorie = categorieRepository.findByCodeCategorie(codeCategorie);
         return Optional.of(CategorieDto.fromEntity(categorie.get())).orElseThrow(() ->
                 new EntityNotFoundExceptions("Aucune categorie avec le code= "+ codeCategorie
                         + " n'est été trouver dans la bd",
@@ -74,7 +74,7 @@ public class CategorieServiceImpl implements CategorieService {
     public void delete(Integer id) {
         if(id == null)
         {
-            log.error("Article ID is null");
+            log.error("Categorie ID is null");
             return;
         }
         categorieRepository.deleteById(id);

@@ -30,7 +30,7 @@ public class ClientServiceImpl implements ClientService {
         if(!errors.isEmpty())
         {
             log.error("Categorie is not valid {}", clientDto);
-            throw new EntityNotFoundExceptions("la catgorie n'est pas valide" ,  ErrorCode.CATEGORY_NOT_FOUND );
+            throw new EntityNotFoundExceptions("la catgorie n'est pas valide" ,  ErrorCode.CLIENT_NOT_FOUND );
         }
         return clientDto.fromEntity(
                 clientRepository.save(ClientDto.toEntity(clientDto))
@@ -41,31 +41,17 @@ public class ClientServiceImpl implements ClientService {
     public ClientDto findById(Integer id) {
         if(id == null)
         {
-            log.error("Article id is null");
+            log.error("Client id is null");
             return null;
         }
         Optional<Client> client = clientRepository.findById(id);
         return Optional.of(ClientDto.fromEntity(client.get())).orElseThrow(() ->
                 new EntityNotFoundExceptions("Aucun Client avec l'id= "+ id
                         + " n'est été trouver dans la bd",
-                        ErrorCode.CATEGORY_NOT_FOUND)
+                        ErrorCode.CLIENT_NOT_FOUND)
         );
     }
 
-    @Override
-    public ClientDto findByCodeClient(String codeClient) {
-        if(!StringUtils.hasLength(codeClient))
-        {
-            log.error("Article Code is null");
-            return null;
-        }
-        Optional<Client> client = clientRepository.findClientByCode(codeClient);
-        return Optional.of(ClientDto.fromEntity(client.get())).orElseThrow(() ->
-                new EntityNotFoundExceptions("Aucun Client avec le code= "+ codeClient
-                        + " n'est été trouver dans la bd",
-                        ErrorCode.CATEGORY_NOT_FOUND)
-        );
-    }
     @Override
     public List<ClientDto> findAll() {
         return  clientRepository.findAll().stream()
@@ -76,7 +62,7 @@ public class ClientServiceImpl implements ClientService {
     public void delete(Integer id) {
         if(id == null)
         {
-            log.error("Article ID is null");
+            log.error("Client ID is null");
             return;
         }
         clientRepository.deleteById(id);

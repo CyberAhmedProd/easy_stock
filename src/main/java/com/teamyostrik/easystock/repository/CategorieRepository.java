@@ -10,6 +10,6 @@ import java.util.Optional;
 public interface CategorieRepository extends JpaRepository<Categorie,Integer> {
 
     Categorie save(Categorie categorie);
-    Optional<Categorie> findCategorieById(Integer id);
-    Optional<Categorie> findCategorieByCodeCategory(String CodeCategory);
+    Optional<Categorie> findById(Integer id);
+    Optional<Categorie> findByCodeCategorie(String CodeCategory);
 }

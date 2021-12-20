@@ -8,12 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 public interface ClientApi {
-    @PostMapping(value = Constants.APP_ROOT+"clien/create",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = Constants.APP_ROOT+"client/create",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
     public ClientDto create(@RequestBody ClientDto client);
     @GetMapping(value = Constants.APP_ROOT+"client/{id_client}",produces = MediaType.APPLICATION_JSON_VALUE)
     public ClientDto getById(@PathVariable("id_client") Integer id);
-    @GetMapping(value = Constants.APP_ROOT+"client/{code_client}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ClientDto getByCode(@PathVariable("code_client") String codeClient);
     @GetMapping(value = Constants.APP_ROOT+"client/all",produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ClientDto> getAll();
     @DeleteMapping(value = Constants.APP_ROOT+"client/delete/{id_client}")
