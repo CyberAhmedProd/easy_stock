@@ -1,19 +1,17 @@
 package com.teamyostrik.easystock.services.impl;
 
-import com.teamyostrik.easystock.dto.ClientDto;
+
 import com.teamyostrik.easystock.dto.FournisseurDto;
 import com.teamyostrik.easystock.exceptions.EntityNotFoundExceptions;
 import com.teamyostrik.easystock.exceptions.ErrorCode;
-import com.teamyostrik.easystock.models.Client;
 import com.teamyostrik.easystock.models.Fournisseur;
 import com.teamyostrik.easystock.repository.FournisseurRepository;
 import com.teamyostrik.easystock.services.FournisseurService;
-import com.teamyostrik.easystock.validators.ClientValidator;
 import com.teamyostrik.easystock.validators.FournisseurValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
+
 
 import java.util.List;
 import java.util.Optional;

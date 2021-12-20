@@ -3,8 +3,6 @@ package com.teamyostrik.easystock.services.impl;
 import com.teamyostrik.easystock.dto.ArticleDto;
 import com.teamyostrik.easystock.exceptions.EntityNotFoundExceptions;
 import com.teamyostrik.easystock.exceptions.ErrorCode;
-import com.teamyostrik.easystock.exceptions.InvalidEntityExceptions;
-import com.teamyostrik.easystock.handlers.ErrorDto;
 import com.teamyostrik.easystock.models.Article;
 import com.teamyostrik.easystock.repository.ArticleRepository;
 import com.teamyostrik.easystock.services.ArticleService;
@@ -16,7 +14,6 @@ import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Service

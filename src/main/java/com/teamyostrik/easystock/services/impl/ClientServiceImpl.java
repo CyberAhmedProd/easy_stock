@@ -1,20 +1,15 @@
 package com.teamyostrik.easystock.services.impl;
 
-import com.teamyostrik.easystock.dto.CategorieDto;
 import com.teamyostrik.easystock.dto.ClientDto;
 import com.teamyostrik.easystock.exceptions.EntityNotFoundExceptions;
 import com.teamyostrik.easystock.exceptions.ErrorCode;
-import com.teamyostrik.easystock.models.Categorie;
 import com.teamyostrik.easystock.models.Client;
 import com.teamyostrik.easystock.repository.ClientRepository;
 import com.teamyostrik.easystock.services.ClientService;
-import com.teamyostrik.easystock.validators.CategorieValidator;
 import com.teamyostrik.easystock.validators.ClientValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -62,7 +57,7 @@ public class ClientServiceImpl implements ClientService {
     public void delete(Integer id) {
         if(id == null)
         {
-            log.error("Client ID is null");
+            log.error("Entreprise ID is null");
             return;
         }
         clientRepository.deleteById(id);

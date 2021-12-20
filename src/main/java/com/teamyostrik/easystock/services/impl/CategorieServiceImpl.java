@@ -1,14 +1,11 @@
 package com.teamyostrik.easystock.services.impl;
 
-import com.teamyostrik.easystock.dto.ArticleDto;
 import com.teamyostrik.easystock.dto.CategorieDto;
 import com.teamyostrik.easystock.exceptions.EntityNotFoundExceptions;
 import com.teamyostrik.easystock.exceptions.ErrorCode;
-import com.teamyostrik.easystock.models.Article;
 import com.teamyostrik.easystock.models.Categorie;
 import com.teamyostrik.easystock.repository.CategorieRepository;
 import com.teamyostrik.easystock.services.CategorieService;
-import com.teamyostrik.easystock.validators.ArticleValidator;
 import com.teamyostrik.easystock.validators.CategorieValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
