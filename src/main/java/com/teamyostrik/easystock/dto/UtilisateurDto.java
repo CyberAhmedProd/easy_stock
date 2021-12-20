@@ -46,4 +46,31 @@ public class UtilisateurDto {
 				.motDePasse(utilisateur.getMotDePasse())
 				.build();
 	}
+
+	public static Utilisateur toEntity(UtilisateurDto utilisateurDto)
+	{
+		if(utilisateurDto == null)
+		{
+			return null;
+		}
+		Utilisateur utilisateur = new Utilisateur();
+		utilisateur.setEmail(utilisateurDto.getEmail());
+		utilisateur.setNom(utilisateurDto.getNom());
+		utilisateur.setPrenom(utilisateurDto.getPrenom());
+		utilisateur.setDateNaissance(utilisateurDto.getDateNaissance());
+		utilisateur.setMotDePasse(utilisateurDto.getMotDePasse());
+		utilisateur.setPhoto(utilisateurDto.getPhoto());
+		utilisateur.setAdresse(AdresseDto.toEntity(utilisateurDto.getAdresse()));
+		utilisateur.setEntreprise(EntrepriseDto.toEntity(utilisateurDto.getEntreprise()));
+		utilisateur.setRoles(
+				utilisateur.getRoles() != null ?
+						utilisateurDto.getRoles().stream()
+								.map(RolesDto :: toEntity)
+								.collect(Collectors.toList()) : null
+		);
+
+
+
+		return utilisateur;
+	}
 }

@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 public class EntrepriseController implements EntrepriseApi {
-    
+
     @Autowired
     private EntrepriseService entrepriseService;
 

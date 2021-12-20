@@ -4,7 +4,6 @@ import com.teamyostrik.easystock.dto.FournisseurDto;
 import com.teamyostrik.easystock.utils.Constants;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 public interface FournisseurApi {
