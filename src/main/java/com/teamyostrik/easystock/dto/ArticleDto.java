@@ -1,10 +1,8 @@
 package com.teamyostrik.easystock.dto;
 
 import com.teamyostrik.easystock.models.Article;
-import com.teamyostrik.easystock.models.Categorie;
 import lombok.Builder;
 import lombok.Data;
-
 import java.time.Instant;
 
 @Data
@@ -27,6 +25,8 @@ public class ArticleDto {
 	
 	private CategorieDto category;
 
+	private Integer idEntreprise;
+
 	public static ArticleDto fromEnity(Article article)
 	{
 		if(article == null)
@@ -40,6 +40,7 @@ public class ArticleDto {
 				.designation(article.getDesignation())
 				.prixUnitaireHT(article.getPrixUnitaireHT())
 				.tauxTVA(article.getTauxTVA())
+				.idEntreprise(article.getIdEntreprise())
 				.prixUnitaireTTC(article.getPrixUnitaireTTC())
 				.photo(article.getPhoto())
 				.category(CategorieDto.fromEntity(article.getCategory()))
@@ -61,6 +62,7 @@ public class ArticleDto {
 		article.setPrixUnitaireTTC(articleDto.getPrixUnitaireTTC());
 		article.setPhoto(articleDto.getPhoto());
 		article.setCategory(CategorieDto.toEntity(articleDto.getCategory()));
+		article.setIdEntreprise(articleDto.getIdEntreprise());
 		return article;
 	}
 	
