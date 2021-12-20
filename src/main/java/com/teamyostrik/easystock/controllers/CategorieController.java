@@ -5,7 +5,6 @@ import com.teamyostrik.easystock.dto.CategorieDto;
 import com.teamyostrik.easystock.services.CategorieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 
 @RestController
