@@ -21,8 +21,7 @@ import lombok.NoArgsConstructor;
 @Table(name ="ligne_vente")
 public class LigneVente extends AbstractEntity{
 
-g
-
+	
 	@ManyToOne
 	@JoinColumn(name ="id_article")
 	private Article article;
