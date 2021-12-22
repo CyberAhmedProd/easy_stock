@@ -9,6 +9,7 @@ import lombok.Data;
 public class LigneVenteDto {
 	private Integer id;
 	private VenteDto vente;
+	private ArticleDto article;
 	private float quantite;
 	private float prixUnitiare;
 
@@ -22,6 +23,7 @@ public class LigneVenteDto {
 				.id(ligneVente.getId())
 				.prixUnitiare(ligneVente.getPrixUnitiare())
 				.quantite(ligneVente.getQuantite())
+				.article(ArticleDto.fromEnity(ligneVente.getArticle()))
 				.vente(VenteDto.fromEntity(ligneVente.getVente()))
 				.build();
 	}
@@ -34,6 +36,7 @@ public class LigneVenteDto {
 		LigneVente ligneVente = new LigneVente();
 		ligneVente.setQuantite(ligneVenteDto.getQuantite());
 		ligneVente.setQuantite(ligneVenteDto.getQuantite());
+		ligneVente.setArticle(ArticleDto.toEntity(ligneVenteDto.getArticle()));
 		ligneVente.setVente(VenteDto.toEntity(ligneVenteDto.getVente()));
 		return ligneVente;
 	}
