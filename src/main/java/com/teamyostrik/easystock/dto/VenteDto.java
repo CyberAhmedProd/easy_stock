@@ -1,5 +1,6 @@
 package com.teamyostrik.easystock.dto;
 
+import com.sun.tools.javac.util.List;
 import com.teamyostrik.easystock.models.Vente;
 import lombok.Builder;
 import lombok.Data;
@@ -9,10 +10,13 @@ import java.time.Instant;
 @Data
 @Builder
 public class VenteDto {
+
 	private Integer id;
 	private String code;
 	private Instant dateVente;
 	private String commentaire;
+	// ensembles des articles a vendre
+	private List<LigneVenteDto> ligneVenteDtos;
 
 	public static VenteDto fromEntity(Vente vente)
 	{
