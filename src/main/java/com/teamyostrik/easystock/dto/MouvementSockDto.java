@@ -1,10 +1,8 @@
 package com.teamyostrik.easystock.dto;
 
 import java.time.Instant;
-
 import com.teamyostrik.easystock.models.MouvementSock;
 import com.teamyostrik.easystock.models.TypeMouvement;
-
 import lombok.Builder;
 import lombok.Data;
 
