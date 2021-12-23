@@ -1,11 +1,12 @@
 package com.teamyostrik.easystock.dto;
 
-import com.sun.tools.javac.util.List;
+
 import com.teamyostrik.easystock.models.Vente;
 import lombok.Builder;
 import lombok.Data;
 
 import java.time.Instant;
+import java.util.List;
 
 @Data
 @Builder

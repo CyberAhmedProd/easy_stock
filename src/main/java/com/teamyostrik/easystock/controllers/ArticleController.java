@@ -46,11 +46,7 @@ public class ArticleController implements ArticleApi {
     public List<ArticleDto> getAll() {
         return articleService.findAll();
     }
-    // to do near future
-    @Override
-    public ArticleDto update(Integer idArticle, ArticleDto article) {
-        return null;
-    }
+
     @Override
     public void delete(Integer idArticle) {
         articleService.delete(idArticle);
