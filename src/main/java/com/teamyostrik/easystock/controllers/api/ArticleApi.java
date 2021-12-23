@@ -46,9 +46,9 @@ public interface ArticleApi {
     public List<ArticleDto> getAll();
 
     @DeleteMapping(value = Constants.APP_ROOT+"article//delete/{id_article}")
-    @ApiOperation(value = "Supprimer un article",notes = "Cette methode permet de su^pprimer un article par son ID", response = ArticleDto.class)
+    @ApiOperation(value = "Supprimer un article",notes = "Cette methode permet de supprimer un article par son ID", response = ArticleDto.class)
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "L'article a ete supprime")
+            @ApiResponse(code = 200, message = "L'article a ete supprimer")
     })
     public void delete(@PathVariable("id_article") Integer idArticle);
 

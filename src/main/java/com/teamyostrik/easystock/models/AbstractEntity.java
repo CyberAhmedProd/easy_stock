@@ -4,11 +4,7 @@ import java.io.Serializable;
 import java.time.Instant;
 
 
-import javax.persistence.Column;
-import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -41,6 +37,19 @@ public class AbstractEntity implements Serializable{
 	@Column(name = "lastUpdateDate")
 	@JsonIgnore
 	private Instant lastUpdateDate;
+
+	/*@PrePersist
+	void prePersist()
+	{
+		creationDate = Instant.now();
+	}
+	@PreUpdate
+	void preUpdate()
+	{
+		lastUpdateDate = Instant.now();
+	}*/
+
+
 
 
 }
