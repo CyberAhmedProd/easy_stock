@@ -82,6 +82,57 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>com.github.kongchen</groupId>
+				<artifactId>swagger-maven-plugin</artifactId>
+				<version>3.1.8</version>
+				<configuration>
+					<apiSources>
+
+						<apiSource>
+							<springmvc>true</springmvc>
+							<locations>
+								<location>com.teamyostrik.easystock.controllers</location>
+							</locations>
+							<basePath>http://localhost:8081</basePath>
+							<info>
+								<title>Swagger Api Easy Stock</title>
+								<version>${project.version}</version>
+								<!-- use markdown here because I'm using markdown for output,
+                                if you need to use html or other markup language, you need to use your target language,
+                                 and note escape your description for xml -->
+								<description>
+									Ceci représente la page des APIs de l'application Easy Stock pour la gestion de stock dédié au petite entreprise.
+								</description>
+								<termsOfService>
+									https://github.com/CyberAhmedProd/easy_stock
+								</termsOfService>
+								<contact>
+									<email>gharbiahmed1992@gmail.com</email>
+									<name>Ahmed Gharbi</name>
+									<url>https://www.linkedin.com/in/ahmed-gharbi-348054158</url>
+								</contact>
+								<license>
+									<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+									<name>Apache 2.0</name>
+								</license>
+							</info>
+							<outputPath>${project.build.directory}</outputPath>
+							<outputFormats>json</outputFormats>
+							<swaggerApiReader>com.github.kongchen.swagger.docgen.reader.SpringMvcApiReader</swaggerApiReader>
+							<swaggerDirectory>${project.build.directory}</swaggerDirectory>
+						</apiSource>
+					</apiSources>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>install</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 

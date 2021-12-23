@@ -1,6 +1,5 @@
 package com.teamyostrik.easystock.controllers.api;
 
-import com.teamyostrik.easystock.dto.ArticleDto;
 import com.teamyostrik.easystock.dto.ClientDto;
 import com.teamyostrik.easystock.utils.Constants;
 import io.swagger.annotations.Api;
