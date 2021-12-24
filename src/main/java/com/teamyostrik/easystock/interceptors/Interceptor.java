@@ -1,13 +1,23 @@
 package com.teamyostrik.easystock.interceptors;
 
 import org.hibernate.EmptyInterceptor;
+import org.springframework.util.StringUtils;
 
 public class Interceptor extends EmptyInterceptor {
 
     @Override
     public String onPrepareStatement(String sql) {
-        System.out.println("");
-        return super.onPrepareStatement(sql);
+
+        // utilisation future
+        /*if(StringUtils.hasLength(sql) && sql.toLowerCase().startsWith("select"))
+      {
+          if(sql.contains("where"))
+              sql = sql + " and idEntreprise = 2";
+          else
+              sql = sql + " where idEntreprise = 2";
+
+      }*/
+      return super.onPrepareStatement(sql);
     }
 
 }
