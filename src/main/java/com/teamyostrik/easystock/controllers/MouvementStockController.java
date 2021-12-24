@@ -4,6 +4,7 @@ import com.teamyostrik.easystock.controllers.api.MouvementStockApi;
 import com.teamyostrik.easystock.dto.MouvementSockDto;
 import com.teamyostrik.easystock.services.MouvementStockService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -15,18 +16,18 @@ public class MouvementStockController implements MouvementStockApi {
     private MouvementStockService mouvementStockService;
 
     @Override
-    public MouvementSockDto save(MouvementSockDto mouvementStockDto) {
-        return mouvementStockService.save(mouvementStockDto);
+    public ResponseEntity<MouvementSockDto> save(MouvementSockDto mouvementStockDto) {
+        return ResponseEntity.ok(mouvementStockService.save(mouvementStockDto));
     }
 
     @Override
-    public MouvementSockDto findById(Integer idMouvementStock) {
-        return mouvementStockService.findById(idMouvementStock);
+    public ResponseEntity<MouvementSockDto> findById(Integer idMouvementStock) {
+        return ResponseEntity.ok(mouvementStockService.findById(idMouvementStock));
     }
 
     @Override
-    public List<MouvementSockDto> findAll() {
-        return mouvementStockService.findAll();
+    public ResponseEntity<List<MouvementSockDto>> findAll() {
+        return ResponseEntity.ok(mouvementStockService.findAll());
     }
 
     @Override

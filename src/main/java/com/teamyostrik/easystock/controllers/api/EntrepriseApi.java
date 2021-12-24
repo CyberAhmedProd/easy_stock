@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface EntrepriseApi {
             @ApiResponse(code = 200, message = "L'objet entreprise cree / modifie"),
             @ApiResponse(code = 404, message = "L'objet n'est pas valide")
     })
-    public EntrepriseDto create(@RequestBody EntrepriseDto entrepriseDto);
+    public ResponseEntity<EntrepriseDto> create(@RequestBody EntrepriseDto entrepriseDto);
 
     @GetMapping(value = Constants.APP_ROOT+"entreprise/{id_entreprise}",produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Recherche une entreprise par ID",notes = "Cette methode permet rechercher une entreprise par son ID", response = EntrepriseDto.class)
@@ -27,7 +28,7 @@ public interface EntrepriseApi {
             @ApiResponse(code = 200, message = "L'entreprise est disponible dans la base des donnees"),
             @ApiResponse(code = 404, message = "L'entreprise n'existe pas dans la base des donnees avec l'ID fourni")
     })
-    public EntrepriseDto getById(@PathVariable("id_entreprise") Integer identreprise);
+    public ResponseEntity<EntrepriseDto> getById(@PathVariable("id_entreprise") Integer identreprise);
 
     @GetMapping(value = Constants.APP_ROOT+"entreprise",produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Renvoi la liste des entreprises",notes = "Cette methode permet de rechercher et renvoyer la liste des entreprises " +
@@ -35,7 +36,7 @@ public interface EntrepriseApi {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "La liste des entreprises / une liste vide")
     })
-    public List<EntrepriseDto> getAll();
+    public ResponseEntity<List<EntrepriseDto>> getAll();
 
     @DeleteMapping(value = Constants.APP_ROOT+"entreprise/{id_entreprise}")
     @ApiOperation(value = "Supprimer une entreprise",notes = "Cette methode permet de supprimer une entreprise par son ID", response = EntrepriseDto.class)

@@ -4,6 +4,7 @@ import com.teamyostrik.easystock.controllers.api.CommandeFournisseurApi;
 import com.teamyostrik.easystock.dto.CommandeFournisseurDto;
 import com.teamyostrik.easystock.services.CommandeFournisseurService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -15,23 +16,23 @@ public class CommandeFournisseurController implements CommandeFournisseurApi {
     private CommandeFournisseurService commandeFournisseurService;
 
     @Override
-    public CommandeFournisseurDto save(CommandeFournisseurDto commandeFournisseurDto) {
-        return commandeFournisseurService.save(commandeFournisseurDto);
+    public ResponseEntity<CommandeFournisseurDto> save(CommandeFournisseurDto commandeFournisseurDto) {
+        return ResponseEntity.ok(commandeFournisseurService.save(commandeFournisseurDto));
     }
 
     @Override
-    public CommandeFournisseurDto findById(Integer idCommandeFournisseur) {
-        return commandeFournisseurService.findById(idCommandeFournisseur);
+    public ResponseEntity<CommandeFournisseurDto> findById(Integer idCommandeFournisseur) {
+        return ResponseEntity.ok(commandeFournisseurService.findById(idCommandeFournisseur));
     }
 
     @Override
-    public CommandeFournisseurDto findByCodeCommande(String codeCommandeFournisseur) {
-        return commandeFournisseurService.findByCodeCommande(codeCommandeFournisseur);
+    public ResponseEntity<CommandeFournisseurDto> findByCodeCommande(String codeCommandeFournisseur) {
+        return ResponseEntity.ok(commandeFournisseurService.findByCodeCommande(codeCommandeFournisseur));
     }
 
     @Override
-    public List<CommandeFournisseurDto> findAll() {
-        return commandeFournisseurService.findAll();
+    public ResponseEntity<List<CommandeFournisseurDto>> findAll() {
+        return ResponseEntity.ok(commandeFournisseurService.findAll());
     }
 
     @Override

@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface ClientApi {
             @ApiResponse(code = 200, message = "L'objet client cree / modifie"),
             @ApiResponse(code = 404, message = "L'objet n'est pas valide")
     })
-    public ClientDto create(@RequestBody ClientDto client);
+    public ResponseEntity<ClientDto> create(@RequestBody ClientDto client);
 
     @GetMapping(value = Constants.APP_ROOT+"client/{id_client}",produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Recherche un client par ID",notes = "Cette methode permet rechercher un client par son ID", response = ClientDto.class)
@@ -27,7 +28,7 @@ public interface ClientApi {
             @ApiResponse(code = 200, message = "Le client est disponible dans la base des donnees"),
             @ApiResponse(code = 404, message = "Le client n'existe pas dans la base des donnees avec l'ID fourni")
     })
-    public ClientDto getById(@PathVariable("id_client") Integer id);
+    public ResponseEntity<ClientDto> getById(@PathVariable("id_client") Integer id);
 
     @GetMapping(value = Constants.APP_ROOT+"client",produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Renvoi la liste des clients",notes = "Cette methode permet de rechercher et renvoyer la liste des clients " +
@@ -35,7 +36,7 @@ public interface ClientApi {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "La liste des clients / une liste vide")
     })
-    public List<ClientDto> getAll();
+    public ResponseEntity<List<ClientDto>> getAll();
 
     @DeleteMapping(value = Constants.APP_ROOT+"client/{id_client}")
     @ApiOperation(value = "Supprimer un client",notes = "Cette methode permet de supprimer un client par son ID", response = ClientDto.class)

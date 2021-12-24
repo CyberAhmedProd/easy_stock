@@ -4,6 +4,7 @@ import com.teamyostrik.easystock.controllers.api.VenteApi;
 import com.teamyostrik.easystock.dto.VenteDto;
 import com.teamyostrik.easystock.services.VenteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -15,23 +16,23 @@ public class VenteController implements VenteApi {
     private VenteService venteService;
 
     @Override
-    public VenteDto save(VenteDto venteDto) {
-        return venteService.save(venteDto);
+    public ResponseEntity<VenteDto> save(VenteDto venteDto) {
+        return ResponseEntity.ok(venteService.save(venteDto));
     }
 
     @Override
-    public VenteDto getVenteById(Integer idVente) {
-        return venteService.getVenteById(idVente);
+    public ResponseEntity<VenteDto> getVenteById(Integer idVente) {
+        return ResponseEntity.ok(venteService.getVenteById(idVente));
     }
 
     @Override
-    public VenteDto getVenteByCode(String codeVente) {
-        return venteService.getVenteByCode(codeVente);
+    public ResponseEntity<VenteDto> getVenteByCode(String codeVente) {
+        return ResponseEntity.ok(venteService.getVenteByCode(codeVente));
     }
 
     @Override
-    public List<VenteDto> getAll() {
-        return venteService.getAll();
+    public ResponseEntity<List<VenteDto>> getAll() {
+        return ResponseEntity.ok(venteService.getAll());
     }
 
     @Override

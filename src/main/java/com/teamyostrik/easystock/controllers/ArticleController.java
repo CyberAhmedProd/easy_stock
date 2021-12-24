@@ -7,6 +7,7 @@ import com.teamyostrik.easystock.models.Categorie;
 import com.teamyostrik.easystock.repository.CategorieRepository;
 import com.teamyostrik.easystock.services.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
@@ -21,34 +22,30 @@ public class ArticleController implements ArticleApi {
     private CategorieRepository categorieRepository;
 
     @Override
-    public ArticleDto save(ArticleDto article) {
-        Categorie categorie = new Categorie();
-        categorie.setCodeCategorie("cat14");
-        categorie.setDesignation("cat");
-        categorie.setCreationDate(Instant.now());
-        categorie.setLastUpdateDate(Instant.now());
-        article.setCreationDate(Instant.now());
-        article.setCategory(CategorieDto.fromEntity(categorieRepository.save(categorie)));
-        return articleService.save(article);
+    public ResponseEntity<ArticleDto> save(ArticleDto article) {
+        return ResponseEntity.ok(articleService.save(article));
     }
 
     @Override
-    public ArticleDto getArticleById(Integer idArticle) {
-        return articleService.findById(idArticle);
+    public ResponseEntity<ArticleDto> getArticleById(Integer idArticle) {
+
+        return ResponseEntity.ok(articleService.findById(idArticle));
     }
 
     @Override
-    public ArticleDto getArticleByCode(String codeArticle) {
-        return articleService.findByCodeArticle(codeArticle);
+    public ResponseEntity<ArticleDto> getArticleByCode(String codeArticle) {
+        return ResponseEntity.ok(articleService.findByCodeArticle(codeArticle));
     }
 
     @Override
-    public List<ArticleDto> getAll() {
-        return articleService.findAll();
+    public ResponseEntity<List<ArticleDto>> getAll() {
+
+        return ResponseEntity.ok(articleService.findAll());
     }
 
     @Override
     public void delete(Integer idArticle) {
+
         articleService.delete(idArticle);
     }
 }

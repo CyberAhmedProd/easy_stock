@@ -4,6 +4,7 @@ import com.teamyostrik.easystock.controllers.api.CategorieApi;
 import com.teamyostrik.easystock.dto.CategorieDto;
 import com.teamyostrik.easystock.services.CategorieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
@@ -12,23 +13,25 @@ public class CategorieController implements CategorieApi {
     @Autowired
     private CategorieService categorieService;
     @Override
-    public CategorieDto save(CategorieDto categorieDto) {
-        return categorieService.save(categorieDto);
+    public ResponseEntity<CategorieDto> save(CategorieDto categorieDto) {
+
+        return ResponseEntity.ok(categorieService.save(categorieDto));
     }
 
     @Override
-    public CategorieDto getCategorieById(Integer idCategorie) {
-        return categorieService.findById(idCategorie);
+    public ResponseEntity<CategorieDto> getCategorieById(Integer idCategorie) {
+        return ResponseEntity.ok(categorieService.findById(idCategorie));
     }
 
     @Override
-    public CategorieDto getCategorieByCode(String codeCategorie) {
-        return categorieService.findByCodeArticle(codeCategorie);
+    public ResponseEntity<CategorieDto> getCategorieByCode(String codeCategorie) {
+        return ResponseEntity.ok(categorieService.findByCodeArticle(codeCategorie));
     }
 
     @Override
-    public List<CategorieDto> getAll() {
-        return categorieService.findAll();
+    public ResponseEntity<List<CategorieDto>> getAll()
+    {
+        return ResponseEntity.ok(categorieService.findAll());
     }
 
     @Override

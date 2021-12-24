@@ -4,6 +4,7 @@ import com.teamyostrik.easystock.controllers.api.EntrepriseApi;
 import com.teamyostrik.easystock.dto.EntrepriseDto;
 import com.teamyostrik.easystock.services.EntrepriseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -15,18 +16,18 @@ public class EntrepriseController implements EntrepriseApi {
     private EntrepriseService entrepriseService;
 
     @Override
-    public EntrepriseDto create(EntrepriseDto entrepriseDto) {
-        return entrepriseService.save(entrepriseDto);
+    public ResponseEntity<EntrepriseDto> create(EntrepriseDto entrepriseDto) {
+        return ResponseEntity.ok(entrepriseService.save(entrepriseDto));
     }
 
     @Override
-    public EntrepriseDto getById(Integer identreprise) {
-        return entrepriseService.findById(identreprise);
+    public ResponseEntity<EntrepriseDto> getById(Integer identreprise) {
+        return ResponseEntity.ok(entrepriseService.findById(identreprise));
     }
 
     @Override
-    public List<EntrepriseDto> getAll() {
-        return entrepriseService.findAll();
+    public ResponseEntity<List<EntrepriseDto>> getAll() {
+        return ResponseEntity.ok(entrepriseService.findAll());
     }
 
     @Override

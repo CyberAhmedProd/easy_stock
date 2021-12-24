@@ -4,6 +4,7 @@ import com.teamyostrik.easystock.controllers.api.ClientApi;
 import com.teamyostrik.easystock.dto.ClientDto;
 import com.teamyostrik.easystock.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -13,19 +14,19 @@ public class ClientController implements ClientApi {
     @Autowired
     private ClientService clientService;
     @Override
-    public ClientDto create(ClientDto client) {
-        return clientService.save(client);
+    public ResponseEntity<ClientDto> create(ClientDto client) {
+        return ResponseEntity.ok(clientService.save(client));
     }
 
     @Override
-    public ClientDto getById(Integer id) {
-        return clientService.findById(id);
+    public ResponseEntity<ClientDto> getById(Integer id) {
+        return ResponseEntity.ok(clientService.findById(id));
     }
 
 
     @Override
-    public List<ClientDto> getAll() {
-        return clientService.findAll();
+    public ResponseEntity<List<ClientDto>> getAll() {
+        return ResponseEntity.ok(clientService.findAll());
     }
 
     @Override

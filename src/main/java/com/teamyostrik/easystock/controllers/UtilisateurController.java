@@ -4,6 +4,7 @@ import com.teamyostrik.easystock.controllers.api.UtilisateurApi;
 import com.teamyostrik.easystock.dto.UtilisateurDto;
 import com.teamyostrik.easystock.services.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -13,18 +14,18 @@ public class UtilisateurController implements UtilisateurApi {
     @Autowired
     private UtilisateurService utilisateurService;
     @Override
-    public UtilisateurDto create(UtilisateurDto utilisateurDto) {
-        return utilisateurService.save(utilisateurDto);
+    public ResponseEntity<UtilisateurDto> create(UtilisateurDto utilisateurDto) {
+        return ResponseEntity.ok(utilisateurService.save(utilisateurDto));
     }
 
     @Override
-    public UtilisateurDto getById(Integer idUtilisateur) {
-        return utilisateurService.findById(idUtilisateur);
+    public ResponseEntity<UtilisateurDto> getById(Integer idUtilisateur) {
+        return ResponseEntity.ok(utilisateurService.findById(idUtilisateur));
     }
 
     @Override
-    public List<UtilisateurDto> getAll() {
-        return utilisateurService.findAll();
+    public ResponseEntity<List<UtilisateurDto>> getAll() {
+        return ResponseEntity.ok(utilisateurService.findAll());
     }
 
     @Override

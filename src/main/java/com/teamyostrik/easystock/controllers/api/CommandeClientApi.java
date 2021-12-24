@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface CommandeClientApi {
             @ApiResponse(code = 200, message = "L'objet commande client cree / modifie"),
             @ApiResponse(code = 404, message = "L'objet n'est pas valide")
     })
-    CommandeClientDto save(@RequestBody CommandeClientDto commandeClientDto);
+    ResponseEntity<CommandeClientDto> save(@RequestBody CommandeClientDto commandeClientDto);
 
 
     @GetMapping(value = Constants.APP_ROOT+"commande_client/{id_commande_client}",produces = MediaType.APPLICATION_JSON_VALUE)
@@ -27,7 +28,7 @@ public interface CommandeClientApi {
             @ApiResponse(code = 200, message = "La commande client est disponible dans la base des donnees"),
             @ApiResponse(code = 404, message = "La commande client n'existe pas dans la base des donnees avec l'ID fourni")
     })
-    CommandeClientDto findById(@PathVariable("id_commande_client") Integer IdCommandeClient);
+    ResponseEntity<CommandeClientDto> findById(@PathVariable("id_commande_client") Integer IdCommandeClient);
 
     @GetMapping(value = Constants.APP_ROOT+"commande_client/{code_commande_client}",produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Recherche une commande client par Code",notes = "Cette methode permet de rechercher une commande client par son Code", response = CommandeClientDto.class)
@@ -35,7 +36,7 @@ public interface CommandeClientApi {
             @ApiResponse(code = 200, message = "La commande client est disponible dans la base des donnees"),
             @ApiResponse(code = 404, message = "La commande client n'existe pas dans la base des donnees avec le code fourni")
     })
-    CommandeClientDto findByCodeCommande(@PathVariable("code_commande_client") String codeCommandeClient);
+    ResponseEntity<CommandeClientDto> findByCodeCommande(@PathVariable("code_commande_client") String codeCommandeClient);
 
     @GetMapping(value = Constants.APP_ROOT+"commande_client")
     @ApiOperation(value = "Renvoi la liste des commandes clients",notes = "Cette methode permet de rechercher et renvoyer la liste des commandes clients " +
@@ -43,12 +44,12 @@ public interface CommandeClientApi {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "La liste des commandes clients / une liste vide")
     })
-    List<CommandeClientDto> findAll();
+    ResponseEntity<List<CommandeClientDto>> findAll();
 
     @DeleteMapping(value = Constants.APP_ROOT+"commande_client/{id_commande_client}")
     @ApiOperation(value = "Supprimer une commande client",notes = "Cette methode permet de supprimer une commande client par son ID", response = CommandeClientDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "La commande fournisseur a ete supprimer")
     })
-    void delete(@PathVariable("id_commande_client") Integer idCommandeClient);
+    public void delete(@PathVariable("id_commande_client") Integer idCommandeClient);
 }
