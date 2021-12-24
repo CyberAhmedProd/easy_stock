@@ -48,7 +48,7 @@ public interface CommandeClientApi {
     @DeleteMapping(value = Constants.APP_ROOT+"commande_client/{id_commande_client}")
     @ApiOperation(value = "Supprimer une commande client",notes = "Cette methode permet de supprimer une commande client par son ID", response = CommandeClientDto.class)
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "La categorie a ete supprimer")
+            @ApiResponse(code = 200, message = "La commande fournisseur a ete supprimer")
     })
     void delete(@PathVariable("id_commande_client") Integer idCommandeClient);
 }
