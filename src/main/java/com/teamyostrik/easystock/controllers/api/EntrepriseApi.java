@@ -1,8 +1,8 @@
 package com.teamyostrik.easystock.controllers.api;
 
-import com.teamyostrik.easystock.dto.ClientDto;
 import com.teamyostrik.easystock.dto.EntrepriseDto;
 import com.teamyostrik.easystock.utils.Constants;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -10,13 +10,13 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@Api(Constants.APP_ROOT + "/entreprises")
 public interface EntrepriseApi {
 
     @PostMapping(value = Constants.APP_ROOT+"entreprise/create",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Enregistrer une entreprise",notes = "Cette methode permet d'enregistrer ou modifier une entreprise", response = EntrepriseApi.class)
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "L'objet client cree / modifie"),
+            @ApiResponse(code = 200, message = "L'objet entreprise cree / modifie"),
             @ApiResponse(code = 404, message = "L'objet n'est pas valide")
     })
     public EntrepriseDto create(@RequestBody EntrepriseDto entrepriseDto);
