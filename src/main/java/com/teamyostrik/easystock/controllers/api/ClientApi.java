@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Api(Constants.APP_ROOT + "/clients")
+@Api(Constants.APP_ROOT + "clients")
 public interface ClientApi {
-    @PostMapping(value = Constants.APP_ROOT+"client/create",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = Constants.APP_ROOT+"client",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Enregistrer un client",notes = "Cette methode permet d'enregistrer ou modifier un client", response = ClientDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'objet client cree / modifie"),
@@ -29,7 +29,7 @@ public interface ClientApi {
     })
     public ClientDto getById(@PathVariable("id_client") Integer id);
 
-    @GetMapping(value = Constants.APP_ROOT+"client/all",produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = Constants.APP_ROOT+"client",produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Renvoi la liste des clients",notes = "Cette methode permet de rechercher et renvoyer la liste des clients " +
             "qui existent dans la base des donnees", responseContainer = "List<ClientDto>")
     @ApiResponses(value = {
@@ -37,7 +37,7 @@ public interface ClientApi {
     })
     public List<ClientDto> getAll();
 
-    @DeleteMapping(value = Constants.APP_ROOT+"client/delete/{id_client}")
+    @DeleteMapping(value = Constants.APP_ROOT+"client/{id_client}")
     @ApiOperation(value = "Supprimer un client",notes = "Cette methode permet de supprimer un client par son ID", response = ClientDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Le client a ete supprimer")

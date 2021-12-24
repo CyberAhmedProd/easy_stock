@@ -10,10 +10,10 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-@Api(Constants.APP_ROOT + "/articles")
+@Api(Constants.APP_ROOT + "articles")
 public interface ArticleApi {
 
-    @PostMapping(value = Constants.APP_ROOT+"article/create",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = Constants.APP_ROOT+"article",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Enregistrer un article",notes = "Cette methode permet d'enregistrer ou modifier un article", response = ArticleDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'objet article cree / modifie"),
@@ -37,7 +37,7 @@ public interface ArticleApi {
     })
     public ArticleDto getArticleByCode(@PathVariable("code_article") String codeArticle);
 
-    @GetMapping(value = Constants.APP_ROOT+"article/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = Constants.APP_ROOT+"article", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Renvoi la liste des articles",notes = "Cette methode permet de rechercher et renvoyer la liste des articles " +
             "qui existent dans la base des donnees", responseContainer = "List<ArticleDto>")
     @ApiResponses(value = {
@@ -45,7 +45,7 @@ public interface ArticleApi {
     })
     public List<ArticleDto> getAll();
 
-    @DeleteMapping(value = Constants.APP_ROOT+"article//delete/{id_article}")
+    @DeleteMapping(value = Constants.APP_ROOT+"article/{id_article}")
     @ApiOperation(value = "Supprimer un article",notes = "Cette methode permet de supprimer un article par son ID", response = ArticleDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'article a ete supprimer")

@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Api(Constants.APP_ROOT + "/categories")
+@Api(Constants.APP_ROOT + "categories")
 public interface CategorieApi {
 
-    @PostMapping(value = Constants.APP_ROOT+"categorie/create",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = Constants.APP_ROOT+"categorie",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Enregistrer une categorie",notes = "Cette methode permet d'enregistrer ou modifier une categorie", response = CategorieDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'objet categorie cree / modifie"),
@@ -38,7 +38,7 @@ public interface CategorieApi {
     })
     public CategorieDto getCategorieByCode(@PathVariable("code_categorie") String codeCategorie);
 
-    @GetMapping(value = Constants.APP_ROOT+"categorie/all")
+    @GetMapping(value = Constants.APP_ROOT+"categorie")
     @ApiOperation(value = "Renvoi la liste des categories",notes = "Cette methode permet de rechercher et renvoyer la liste des categories " +
             "qui existent dans la base des donnees", responseContainer = "List<CategorieDto>")
     @ApiResponses(value = {
@@ -46,7 +46,7 @@ public interface CategorieApi {
     })
     public List<CategorieDto> getAll();
 
-    @DeleteMapping(value = Constants.APP_ROOT+"categorie/delete/{id_categorie}")
+    @DeleteMapping(value = Constants.APP_ROOT+"categorie/{id_categorie}")
     @ApiOperation(value = "Supprimer une categorie",notes = "Cette methode permet de supprimer une categorie par son ID", response = CategorieDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "La categorie a ete supprimer")

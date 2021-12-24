@@ -10,10 +10,10 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@Api(Constants.APP_ROOT + "/entreprises")
+@Api(Constants.APP_ROOT + "entreprises")
 public interface EntrepriseApi {
 
-    @PostMapping(value = Constants.APP_ROOT+"entreprise/create",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = Constants.APP_ROOT+"entreprise",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Enregistrer une entreprise",notes = "Cette methode permet d'enregistrer ou modifier une entreprise", response = EntrepriseApi.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'objet entreprise cree / modifie"),
@@ -29,7 +29,7 @@ public interface EntrepriseApi {
     })
     public EntrepriseDto getById(@PathVariable("id_entreprise") Integer identreprise);
 
-    @GetMapping(value = Constants.APP_ROOT+"entreprise/all",produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = Constants.APP_ROOT+"entreprise",produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Renvoi la liste des entreprises",notes = "Cette methode permet de rechercher et renvoyer la liste des entreprises " +
             "qui existent dans la base des donnees", responseContainer = "List<EntrepriseDto>")
     @ApiResponses(value = {
@@ -37,7 +37,7 @@ public interface EntrepriseApi {
     })
     public List<EntrepriseDto> getAll();
 
-    @DeleteMapping(value = Constants.APP_ROOT+"entreprise/delete/{id_entreprise}")
+    @DeleteMapping(value = Constants.APP_ROOT+"entreprise/{id_entreprise}")
     @ApiOperation(value = "Supprimer une entreprise",notes = "Cette methode permet de supprimer une entreprise par son ID", response = EntrepriseDto.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'entreprise a ete supprimer")
