@@ -1,28 +1,27 @@
 package com.teamyostrik.easystock.services.authentification;
 
-import com.teamyostrik.easystock.exceptions.EntityNotFoundExceptions;
-import com.teamyostrik.easystock.exceptions.ErrorCode;
-import com.teamyostrik.easystock.models.Utilisateur;
-import com.teamyostrik.easystock.repository.UtilisateurRepository;
+import com.teamyostrik.easystock.dto.UtilisateurDto;
+import com.teamyostrik.easystock.models.auth.ExtendedUser;
+import com.teamyostrik.easystock.services.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.Collections;
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ApplicationUserDetailsService implements UserDetailsService {
     @Autowired
-    private UtilisateurRepository utilisateurRepository;
+    private UtilisateurService utilisateurService;
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Utilisateur utilisateur = utilisateurRepository.findUtilisateurByEmail(email).orElseThrow(() ->
-                new EntityNotFoundExceptions("Aucun utilisateur avec l'email fourni", ErrorCode.UTILISATEUR_NOT_FOUND)
-                );
-        return new User(utilisateur.getEmail(),utilisateur.getMotDePasse(), Collections.emptyList());
+        UtilisateurDto utilisateur = utilisateurService.findByEmail(email);
+
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        utilisateur.getRoles().forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getRoleName())));
+        return new ExtendedUser(utilisateur.getEmail(),utilisateur.getMotDePasse(), utilisateur.getEntreprise().getId(),authorities);
     }
 }

@@ -9,5 +9,6 @@ public interface UtilisateurService {
     UtilisateurDto findById(Integer id);
     List<UtilisateurDto> findAll();
     void delete(Integer id);
+    public UtilisateurDto findByEmail(String email);
 }
 
