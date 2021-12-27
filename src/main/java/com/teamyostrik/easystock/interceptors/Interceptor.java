@@ -1,22 +1,34 @@
 package com.teamyostrik.easystock.interceptors;
 
 import org.hibernate.EmptyInterceptor;
+import org.slf4j.MDC;
 import org.springframework.util.StringUtils;
 
 public class Interceptor extends EmptyInterceptor {
 
     @Override
     public String onPrepareStatement(String sql) {
-
-        // utilisation future
-        /*if(StringUtils.hasLength(sql) && sql.toLowerCase().startsWith("select"))
-      {
-          if(sql.contains("where"))
-              sql = sql + " and idEntreprise = 2";
-          else
-              sql = sql + " where idEntreprise = 2";
-
-      }*/
+        if(StringUtils.hasLength(sql) && sql.toLowerCase().startsWith("select"))
+        {
+            // select user
+            final String entityName = sql.substring(7 , sql.indexOf("."));
+            final String idEntreprise = MDC.get("idEntreprise");
+            if(     StringUtils.hasLength(entityName)
+                    && !entityName.toUpperCase().contains("entreprise")
+                    && !entityName.toLowerCase().contains("roles")
+                    &&StringUtils.hasLength(idEntreprise)
+                )
+            {
+                    if(sql.contains("where"))
+                    {
+                        sql = sql + " and " + entityName + ".id_entreprise = "+ idEntreprise;
+                    }
+                    else
+                    {
+                        sql = sql + " where " + entityName + ".id_entreprise = "+idEntreprise;
+                    }
+            }
+        }
       return super.onPrepareStatement(sql);
     }
 

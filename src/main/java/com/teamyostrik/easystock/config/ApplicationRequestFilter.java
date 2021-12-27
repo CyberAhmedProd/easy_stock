@@ -2,6 +2,7 @@ package com.teamyostrik.easystock.config;
 
 import com.teamyostrik.easystock.services.authentification.ApplicationUserDetailsService;
 import com.teamyostrik.easystock.utils.JwtUtil;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,11 +30,13 @@ public class ApplicationRequestFilter extends OncePerRequestFilter {
         final String authHeader = request.getHeader("Authorization");
         String username = null;
         String jwt = null;
+        String idEntreprise = null;
 
         if(StringUtils.hasLength(authHeader) && authHeader.startsWith("Bearer "))
         {
             jwt = authHeader.substring(7);
             username = jwtUtil.getUsernameFromToken(jwt);
+            idEntreprise = jwtUtil.extractIdEntreprise(jwt);
         }
         if(StringUtils.hasLength(username) && SecurityContextHolder.getContext().getAuthentication() == null)
         {
@@ -52,7 +55,7 @@ public class ApplicationRequestFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             }
         }
-
+        MDC.put("idEntreprise", idEntreprise);
         filterChain.doFilter(request,response);
     }
 }

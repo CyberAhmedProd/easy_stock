@@ -2,6 +2,7 @@ package com.teamyostrik.easystock.controllers;
 
 import com.teamyostrik.easystock.dto.auth.AuthenticationRequest;
 import com.teamyostrik.easystock.dto.auth.AuthentificationResponse;
+import com.teamyostrik.easystock.models.auth.ExtendedUser;
 import com.teamyostrik.easystock.services.authentification.ApplicationUserDetailsService;
 import com.teamyostrik.easystock.utils.Constants;
 import com.teamyostrik.easystock.utils.JwtUtil;
@@ -33,7 +34,7 @@ public class AuthentificationController {
                 )
         );
         final UserDetails userDetails = applicationUserDetailsService.loadUserByUsername(request.getLogin());
-        final String jwt = jwtUtil.generateToken(userDetails);
+        final String jwt = jwtUtil.generateToken((ExtendedUser) userDetails);
         return ResponseEntity.ok(AuthentificationResponse.builder().accessToken(jwt).build());
     }
 }

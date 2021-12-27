@@ -137,4 +137,6 @@ public class CommandeClientImpl implements CommandeClientService {
         }
         commandeClientRepository.deleteById(id);
     }
+
+    private boolean check
 }

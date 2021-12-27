@@ -6,6 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.teamyostrik.easystock.models.Client;
 import com.teamyostrik.easystock.models.CommandeClient;
+import com.teamyostrik.easystock.models.EtatCommande;
 import lombok.Builder;
 import lombok.Data;
 
@@ -17,7 +18,8 @@ public class CommandeClientDto {
 	private String codeCommandeClient;
 	private Instant dateCommande;
 	private ClientDto client;
-//	@JsonIgnore
+	private Integer idEntreprise;
+	private EtatCommande etatCommande;
 	private List<LigneCommandeClientDto> ligneCommandeClients;
 
 	public static CommandeClientDto fromEntity(CommandeClient commandeClient)
@@ -30,7 +32,9 @@ public class CommandeClientDto {
 				.id(commandeClient.getId())
 				.codeCommandeClient(commandeClient.getCodeCommandeClient())
 				.dateCommande(commandeClient.getDateCommande())
+				.etatCommande(commandeClient.getEtatCommande())
 				.client(ClientDto.fromEntity(commandeClient.getClient()))
+				.idEntreprise(commandeClient.getIdEntreprise())
 				.build();
 	}
 	public static CommandeClient toEntity(CommandeClientDto commandeClientDto)
@@ -40,9 +44,12 @@ public class CommandeClientDto {
 			return null;
 		}
 		CommandeClient commandeClient = new CommandeClient();
+		commandeClient.setId(commandeClientDto.getId());
 		commandeClient.setCodeCommandeClient(commandeClientDto.getCodeCommandeClient());
-		commandeClient.setClient(ClientDto.toEntity(commandeClientDto.getClient()));
 		commandeClient.setDateCommande(commandeClientDto.getDateCommande());
+		commandeClient.setEtatCommande(commandeClient.getEtatCommande());
+		commandeClient.setClient(ClientDto.toEntity(commandeClientDto.getClient()));
+		commandeClient.setIdEntreprise(commandeClientDto.getIdEntreprise());
 		return commandeClient;
 	}
 
