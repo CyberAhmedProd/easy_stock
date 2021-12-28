@@ -1,6 +1,7 @@
 package com.teamyostrik.easystock.controllers.api;
 
 import com.teamyostrik.easystock.dto.CommandeClientDto;
+import com.teamyostrik.easystock.models.EtatCommande;
 import com.teamyostrik.easystock.utils.Constants;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,6 +21,14 @@ public interface CommandeClientApi {
             @ApiResponse(code = 404, message = "L'objet n'est pas valide")
     })
     ResponseEntity<CommandeClientDto> save(@RequestBody CommandeClientDto commandeClientDto);
+
+    @PatchMapping(value = Constants.APP_ROOT+"commande_client/{id_commande}/{etat_commande}",produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Metre à jour l'état d'une commande client",notes = "Cette methode permet de metre à jour létat d'une commande client", response = CommandeClientDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "L'objet état commande client modifie"),
+            @ApiResponse(code = 404, message = "L'objet n'est pas valide")
+    })
+    ResponseEntity<CommandeClientDto> save(@PathVariable("id_commande") Integer idCommande, @PathVariable("etat_commande") EtatCommande etatCommande);
 
 
     @GetMapping(value = Constants.APP_ROOT+"commande_client/{id_commande_client}",produces = MediaType.APPLICATION_JSON_VALUE)

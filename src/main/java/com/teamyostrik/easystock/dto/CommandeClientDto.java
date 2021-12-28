@@ -53,4 +53,9 @@ public class CommandeClientDto {
 		return commandeClient;
 	}
 
+	public boolean isCommandeLivree()
+	{
+		return EtatCommande.LIVREE.equals(this.etatCommande);
+	}
+
 }
