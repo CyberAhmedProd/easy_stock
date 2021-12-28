@@ -54,7 +54,15 @@ public interface CommandeClientApi {
             @ApiResponse(code = 200, message = "L'objet article ligne commande client modifie"),
             @ApiResponse(code = 404, message = "L'objet n'est pas valide")
     })
-ResponseEntity<CommandeClientDto> updateArticleCommande(@PathVariable("id_commande") Integer idCommande, @PathVariable("id_ligne_commande") Integer idLigneCommande,@PathVariable("id_article") Integer idArticle);
+    ResponseEntity<CommandeClientDto> updateArticleCommande(@PathVariable("id_commande") Integer idCommande, @PathVariable("id_ligne_commande") Integer idLigneCommande,@PathVariable("id_article") Integer idArticle);
+
+    @DeleteMapping(value = Constants.APP_ROOT+"commande_client/{id_commande}/{id_ligne_commande}",produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Suppression d'un article d'une commande client dans une ligne de commande",notes = "Cette methode permet de supprimer un article d'une commande client dans une ligne de commande", response = CommandeClientDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "L'objet article commande client supprimé"),
+            @ApiResponse(code = 404, message = "L'objet n'est pas valide")
+    })
+    ResponseEntity<CommandeClientDto> deleteArticleCommande(@PathVariable("id_commande") Integer idCommande, @PathVariable("id_ligne_commande") Integer idLigneCommande);
 
 
     @GetMapping(value = Constants.APP_ROOT+"commande_client/{id_commande_client}",produces = MediaType.APPLICATION_JSON_VALUE)

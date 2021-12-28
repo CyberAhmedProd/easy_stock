@@ -39,6 +39,11 @@ public class CommandeClientController implements CommandeClientApi {
     }
 
     @Override
+    public ResponseEntity<CommandeClientDto> deleteArticleCommande(Integer idCommande, Integer idLigneCommande) {
+        return ResponseEntity.ok(commandeClientService.deleteArticle(idCommande,idLigneCommande));
+    }
+
+    @Override
     public ResponseEntity<CommandeClientDto> findById(Integer IdCommandeClient) {
         return ResponseEntity.ok(commandeClientService.findById(IdCommandeClient));
     }

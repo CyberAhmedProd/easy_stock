@@ -185,6 +185,16 @@ public class CommandeClientImpl implements CommandeClientService {
     }
 
     @Override
+    public CommandeClientDto deleteArticle(Integer idCommande, Integer idLigneCommande) {
+        checkIdCommande(idCommande);
+        checkIdLigneCommande(idLigneCommande);
+        CommandeClientDto commandeClientDto = checkEtatCommande(idCommande);
+        //Check the ligneCommande in future
+        ligneCommandeClientRepository.deleteById(idLigneCommande);
+        return commandeClientDto;
+    }
+
+    @Override
     public CommandeClientDto findById(Integer id) {
         if(id == null)
         {
