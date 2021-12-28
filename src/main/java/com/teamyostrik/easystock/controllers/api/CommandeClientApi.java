@@ -28,7 +28,16 @@ public interface CommandeClientApi {
             @ApiResponse(code = 200, message = "L'objet état commande client modifie"),
             @ApiResponse(code = 404, message = "L'objet n'est pas valide")
     })
-    ResponseEntity<CommandeClientDto> save(@PathVariable("id_commande") Integer idCommande, @PathVariable("etat_commande") EtatCommande etatCommande);
+    ResponseEntity<CommandeClientDto> updateEtatCommande(@PathVariable("id_commande") Integer idCommande, @PathVariable("etat_commande") EtatCommande etatCommande);
+
+
+    @PatchMapping(value = Constants.APP_ROOT+"commande_client/{id_commande}/{id_ligne_commande}/{quantite}",produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Metre à jour la quantité de la ligne commande d'une commande client",notes = "Cette methode permet de metre à jour la quantite d'une ligne commane d'une commande client", response = CommandeClientDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "L'objet quantite ligne commande client modifie"),
+            @ApiResponse(code = 404, message = "L'objet n'est pas valide")
+    })
+    ResponseEntity<CommandeClientDto> updateQuantiteCommande(@PathVariable("id_commande") Integer idCommande, @PathVariable("id_ligne_commande") Integer idLigneCommande,@PathVariable("quantite") float quantite);
 
 
     @GetMapping(value = Constants.APP_ROOT+"commande_client/{id_commande_client}",produces = MediaType.APPLICATION_JSON_VALUE)

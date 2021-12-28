@@ -19,8 +19,13 @@ public class CommandeClientController implements CommandeClientApi {
     }
 
     @Override
-    public ResponseEntity<CommandeClientDto> save(Integer idCommande, EtatCommande etatCommande) {
+    public ResponseEntity<CommandeClientDto> updateEtatCommande(Integer idCommande, EtatCommande etatCommande) {
         return ResponseEntity.ok(commandeClientService.updateEtatCommande(idCommande,etatCommande));
+    }
+
+    @Override
+    public ResponseEntity<CommandeClientDto> updateQuantiteCommande(Integer idCommande, Integer idLigneCommande, float quantite) {
+        return  ResponseEntity.ok(commandeClientService.updateQuantiteCommande(idCommande,idLigneCommande,quantite));
     }
 
     @Override

@@ -116,6 +116,40 @@ public class CommandeClientImpl implements CommandeClientService {
     }
 
     @Override
+    public CommandeClientDto updateQuantiteCommande(Integer idCommande, Integer idLigneCommande, float quantite) {
+        if(idCommande == null)
+        {
+            log.error("Commande Client ID is NULL");
+            throw new InvalideOperationException("Impossible de modifier la commande avec ID NULL ",ErrorCode.COMMANDE_CLIENT_NOT_MODIFIABLE);
+        }
+        if(idLigneCommande == null)
+        {
+            log.error("l'ID de la ligne commande Client is NULL");
+            throw new InvalideOperationException("Impossible de modifier la commande avec une ligne Commande NULL ",ErrorCode.COMMANDE_CLIENT_NOT_MODIFIABLE);
+        }
+        if(quantite <=0)
+        {
+            log.error("la quantity de la ligne commande Client is éronné");
+            throw new InvalideOperationException("Impossible de modifier la commande avec une quantite de ligne Commande éronnée ",ErrorCode.COMMANDE_CLIENT_NOT_MODIFIABLE);
+        }
+        CommandeClientDto commandeClientDto = findById(idCommande);
+        if(commandeClientDto.isCommandeLivree())
+            throw new InvalideOperationException("Impossible de modifier la commande avec ID NULL ",ErrorCode.COMMANDE_CLIENT_NOT_MODIFIABLE);
+
+        Optional<LigneCommandeClient> ligneCommandeClientOptional = ligneCommandeClientRepository.findById(idLigneCommande);
+        if(ligneCommandeClientOptional.isPresent()) {
+            new EntityNotFoundExceptions(
+                    "Aucune Ligne Commande client n'a ete trouve avec l'ID "+idLigneCommande,
+                    ErrorCode.LIGNE_COMMANDE_CLIENT_NOT_FOUND
+            );
+        }
+        LigneCommandeClient ligneCommandeClient = ligneCommandeClientOptional.get();
+        ligneCommandeClient.setQuantite(quantite);
+        ligneCommandeClientRepository.save(ligneCommandeClient);
+        return commandeClientDto;
+    }
+
+    @Override
     public CommandeClientDto findById(Integer id) {
         if(id == null)
         {
