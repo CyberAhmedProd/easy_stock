@@ -39,6 +39,13 @@ public interface CommandeClientApi {
     })
     ResponseEntity<CommandeClientDto> updateQuantiteCommande(@PathVariable("id_commande") Integer idCommande, @PathVariable("id_ligne_commande") Integer idLigneCommande,@PathVariable("quantite") float quantite);
 
+    @PatchMapping(value = Constants.APP_ROOT+"commande_client/{id_commande}/{id_client}",produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Metre à jour le client d'une commande client",notes = "Cette methode permet de metre à jour le client d'une commande client", response = CommandeClientDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "L'objet client de la  commande client modifie"),
+            @ApiResponse(code = 404, message = "L'objet n'est pas valide")
+    })
+    ResponseEntity<CommandeClientDto> updateClientCommande(@PathVariable("id_commande") Integer idCommande, @PathVariable("id_client") Integer idClient);
 
     @GetMapping(value = Constants.APP_ROOT+"commande_client/{id_commande_client}",produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Recherche une commande client par ID",notes = "Cette methode permet rechercher une commande client par son ID", response = CommandeClientDto.class)

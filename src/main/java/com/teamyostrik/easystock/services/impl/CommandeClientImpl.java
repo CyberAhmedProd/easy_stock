@@ -1,5 +1,6 @@
 package com.teamyostrik.easystock.services.impl;
 
+import com.teamyostrik.easystock.dto.ClientDto;
 import com.teamyostrik.easystock.dto.CommandeClientDto;
 import com.teamyostrik.easystock.dto.LigneCommandeClientDto;
 import com.teamyostrik.easystock.exceptions.EntityNotFoundExceptions;
@@ -137,7 +138,7 @@ public class CommandeClientImpl implements CommandeClientService {
             throw new InvalideOperationException("Impossible de modifier la commande avec ID NULL ",ErrorCode.COMMANDE_CLIENT_NOT_MODIFIABLE);
 
         Optional<LigneCommandeClient> ligneCommandeClientOptional = ligneCommandeClientRepository.findById(idLigneCommande);
-        if(ligneCommandeClientOptional.isPresent()) {
+        if(!ligneCommandeClientOptional.isPresent()) {
             new EntityNotFoundExceptions(
                     "Aucune Ligne Commande client n'a ete trouve avec l'ID "+idLigneCommande,
                     ErrorCode.LIGNE_COMMANDE_CLIENT_NOT_FOUND
@@ -147,6 +148,36 @@ public class CommandeClientImpl implements CommandeClientService {
         ligneCommandeClient.setQuantite(quantite);
         ligneCommandeClientRepository.save(ligneCommandeClient);
         return commandeClientDto;
+    }
+
+    @Override
+    public CommandeClientDto updateClient(Integer idCommande, Integer idClient) {
+        if(idCommande == null)
+        {
+            log.error("Commande Client ID is NULL");
+            throw new InvalideOperationException("Impossible de modifier la commande avec ID NULL ",ErrorCode.COMMANDE_CLIENT_NOT_MODIFIABLE);
+        }
+        if(idClient == null)
+        {
+            log.error("l'ID du Client is NULL");
+            throw new InvalideOperationException("Impossible de modifier la commande avec un ID client NULL ",ErrorCode.COMMANDE_CLIENT_NOT_MODIFIABLE);
+        }
+        CommandeClientDto commandeClientDto = findById(idCommande);
+        if(commandeClientDto.isCommandeLivree())
+            throw new InvalideOperationException("Impossible de modifier la commande avec ID NULL ",ErrorCode.COMMANDE_CLIENT_NOT_MODIFIABLE);
+
+        Optional<Client> clientOptional = clientRepository.findClientById(idClient);
+        if(!clientOptional.isPresent())
+        {
+            new EntityNotFoundExceptions(
+                    "Aucune  Commande client n'a ete trouve avec l'ID du Client  "+idClient,
+                    ErrorCode.CLIENT_NOT_FOUND
+            );
+        }
+        commandeClientDto.setClient(ClientDto.fromEntity(clientOptional.get()));
+        return CommandeClientDto.fromEntity(
+                commandeClientRepository.save(CommandeClientDto.toEntity(commandeClientDto))
+        );
     }
 
     @Override
@@ -162,6 +193,7 @@ public class CommandeClientImpl implements CommandeClientService {
                         "Aucune Commande client n'a ete trouve avec l'ID "+id,
                         ErrorCode.COMMANDE_CLIENT_NOT_FOUND
                 ));
+
     }
 
     @Override
