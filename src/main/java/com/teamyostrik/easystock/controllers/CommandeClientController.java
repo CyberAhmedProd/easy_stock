@@ -2,6 +2,7 @@ package com.teamyostrik.easystock.controllers;
 
 import com.teamyostrik.easystock.controllers.api.CommandeClientApi;
 import com.teamyostrik.easystock.dto.CommandeClientDto;
+import com.teamyostrik.easystock.dto.LigneCommandeClientDto;
 import com.teamyostrik.easystock.models.EtatCommande;
 import com.teamyostrik.easystock.services.CommandeClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,11 @@ public class CommandeClientController implements CommandeClientApi {
     @Override
     public ResponseEntity<CommandeClientDto> deleteArticleCommande(Integer idCommande, Integer idLigneCommande) {
         return ResponseEntity.ok(commandeClientService.deleteArticle(idCommande,idLigneCommande));
+    }
+
+    @Override
+    public ResponseEntity<List<LigneCommandeClientDto>> findAllLignesCommandesByCommandeClientId(Integer idCommande) {
+        return ResponseEntity.ok(commandeClientService.findAllLignesCommandesByCommandeClientId(idCommande));
     }
 
     @Override

@@ -233,6 +233,13 @@ public class CommandeClientImpl implements CommandeClientService {
     }
 
     @Override
+    public List<LigneCommandeClientDto> findAllLignesCommandesByCommandeClientId(Integer idCommande) {
+        return ligneCommandeClientRepository.findAllByComAndCommandeClientId(idCommande).stream()
+                .map(LigneCommandeClientDto::fromEntity)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public void delete(Integer id) {
         if(id == null)
         {

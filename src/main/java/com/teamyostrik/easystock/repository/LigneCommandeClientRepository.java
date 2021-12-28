@@ -4,6 +4,10 @@ import com.teamyostrik.easystock.models.LigneCommandeClient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface LigneCommandeClientRepository extends JpaRepository<LigneCommandeClient,Integer> {
+
+    List<LigneCommandeClient> findAllByComAndCommandeClientId(Integer id);
 }

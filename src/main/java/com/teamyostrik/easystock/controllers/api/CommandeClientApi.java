@@ -1,6 +1,7 @@
 package com.teamyostrik.easystock.controllers.api;
 
 import com.teamyostrik.easystock.dto.CommandeClientDto;
+import com.teamyostrik.easystock.dto.LigneCommandeClientDto;
 import com.teamyostrik.easystock.models.EtatCommande;
 import com.teamyostrik.easystock.utils.Constants;
 import io.swagger.annotations.Api;
@@ -64,6 +65,13 @@ public interface CommandeClientApi {
     })
     ResponseEntity<CommandeClientDto> deleteArticleCommande(@PathVariable("id_commande") Integer idCommande, @PathVariable("id_ligne_commande") Integer idLigneCommande);
 
+    @GetMapping(value = Constants.APP_ROOT+"commande_client/ligne_commande/{id_commande}")
+    @ApiOperation(value = "Renvoi la liste des lignes commandes de la commande client ",notes = "Cette methode permet de rechercher et renvoyer la liste des lignes commandes de la commande client " +
+            "qui existent dans la base des donnees", responseContainer = "List<LigneCommandeClientDto>")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La liste des lignes commandes clients / une liste vide")
+    })
+    ResponseEntity<List<LigneCommandeClientDto>> findAllLignesCommandesByCommandeClientId(@PathVariable("id_commande") Integer idCommande);
 
     @GetMapping(value = Constants.APP_ROOT+"commande_client/{id_commande_client}",produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Recherche une commande client par ID",notes = "Cette methode permet rechercher une commande client par son ID", response = CommandeClientDto.class)
