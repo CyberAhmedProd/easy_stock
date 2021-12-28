@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface LigneCommandeClientRepository extends JpaRepository<LigneCommandeClient,Integer> {
 
-    List<LigneCommandeClient> findAllByComAndCommandeClientId(Integer id);
+    List<LigneCommandeClient> findAllByCommandeClientId(Integer id);
 }
