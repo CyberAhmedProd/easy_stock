@@ -34,6 +34,11 @@ public class CommandeClientController implements CommandeClientApi {
     }
 
     @Override
+    public ResponseEntity<CommandeClientDto> updateArticleCommande(Integer idCommande, Integer idLigneCommande, Integer idArticle) {
+        return ResponseEntity.ok(commandeClientService.updateArticle(idCommande,idLigneCommande,idArticle));
+    }
+
+    @Override
     public ResponseEntity<CommandeClientDto> findById(Integer IdCommandeClient) {
         return ResponseEntity.ok(commandeClientService.findById(IdCommandeClient));
     }

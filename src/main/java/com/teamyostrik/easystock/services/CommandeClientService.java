@@ -11,7 +11,7 @@ public interface CommandeClientService {
     CommandeClientDto updateEtatCommande(Integer idCommande, EtatCommande etatCommande);
     CommandeClientDto updateQuantiteCommande(Integer idCommande, Integer idLigneCommande, float quantite);
     CommandeClientDto updateClient(Integer idCommande, Integer idClient);
-    CommandeClientDto updateArticle(Integer idCommande, Integer )
+    CommandeClientDto updateArticle(Integer idCommande, Integer idLigneCommande,Integer idArticle);
     CommandeClientDto findById(Integer id);
     CommandeClientDto findByCodeCommande(String codeCommandeClient);
     List<CommandeClientDto> findAll();
