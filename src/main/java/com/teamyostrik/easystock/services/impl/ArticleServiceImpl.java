@@ -1,10 +1,16 @@
 package com.teamyostrik.easystock.services.impl;
 
 import com.teamyostrik.easystock.dto.ArticleDto;
+import com.teamyostrik.easystock.dto.LigneCommandeClientDto;
+import com.teamyostrik.easystock.dto.LigneCommandeFournisseurDto;
+import com.teamyostrik.easystock.dto.LigneVenteDto;
 import com.teamyostrik.easystock.exceptions.EntityNotFoundExceptions;
 import com.teamyostrik.easystock.exceptions.ErrorCode;
 import com.teamyostrik.easystock.models.Article;
 import com.teamyostrik.easystock.repository.ArticleRepository;
+import com.teamyostrik.easystock.repository.LigneCommandeClientRepository;
+import com.teamyostrik.easystock.repository.LigneCommandeFournisseurRepository;
+import com.teamyostrik.easystock.repository.LigneVenteRepository;
 import com.teamyostrik.easystock.services.ArticleService;
 import com.teamyostrik.easystock.validators.ArticleValidator;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +27,12 @@ import java.util.stream.Collectors;
 public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleRepository articleRepository;
+    @Autowired
+    private LigneVenteRepository ligneVenteRepository;
+    @Autowired
+    private LigneCommandeFournisseurRepository ligneCommandeFournisseurRepository;
+    @Autowired
+    private LigneCommandeClientRepository ligneCommandeClientRepository;
     @Override
     public ArticleDto save(ArticleDto articleDto) {
         List<String> errors = ArticleValidator.validate(articleDto);
@@ -69,6 +81,35 @@ public class ArticleServiceImpl implements ArticleService {
                 .map(ArticleDto::fromEnity)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<LigneVenteDto> findHistoryVentes(Integer idArticle) {
+        return ligneVenteRepository.findAllByArticleId(idArticle).stream()
+                .map(LigneVenteDto::fromEntity)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<LigneCommandeClientDto> findHistoryCommandeCLient(Integer idArticle) {
+        return ligneCommandeClientRepository.findAllByArticleId(idArticle).stream()
+                .map(LigneCommandeClientDto::fromEntity)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<LigneCommandeFournisseurDto> findHistoryCommandeFournisseur(Integer idArticle) {
+        return ligneCommandeFournisseurRepository.findAllByArticleId(idArticle).stream()
+                .map(LigneCommandeFournisseurDto::fromEntity)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ArticleDto> findAllArticleByCategory(Integer idCategorie) {
+        return articleRepository.findAllByCategoryId(idCategorie).stream()
+                .map(ArticleDto::fromEnity)
+                .collect(Collectors.toList());
+    }
+
     @Override
     public void delete(Integer id) {
         if(id == null)

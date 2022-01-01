@@ -1,8 +1,7 @@
 package com.teamyostrik.easystock.controllers;
 
 import com.teamyostrik.easystock.controllers.api.ArticleApi;
-import com.teamyostrik.easystock.dto.ArticleDto;
-import com.teamyostrik.easystock.dto.CategorieDto;
+import com.teamyostrik.easystock.dto.*;
 import com.teamyostrik.easystock.models.Categorie;
 import com.teamyostrik.easystock.repository.CategorieRepository;
 import com.teamyostrik.easystock.services.ArticleService;
@@ -41,6 +40,26 @@ public class ArticleController implements ArticleApi {
     public ResponseEntity<List<ArticleDto>> getAll() {
 
         return ResponseEntity.ok(articleService.findAll());
+    }
+
+    @Override
+    public List<LigneVenteDto> findHistoryVentes(Integer idArticle) {
+        return articleService.findHistoryVentes(idArticle);
+    }
+
+    @Override
+    public List<LigneCommandeClientDto> findHistoryCommandeCLient(Integer idArticle) {
+        return articleService.findHistoryCommandeCLient(idArticle);
+    }
+
+    @Override
+    public List<LigneCommandeFournisseurDto> findHistoryCommandeFournisseur(Integer idArticle) {
+        return articleService.findHistoryCommandeFournisseur(idArticle);
+    }
+
+    @Override
+    public List<ArticleDto> findAllArticleByCategory(Integer idCategorie) {
+        return articleService.findAllArticleByCategory(idCategorie);
     }
 
     @Override
