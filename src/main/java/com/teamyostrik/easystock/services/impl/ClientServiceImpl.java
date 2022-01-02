@@ -3,8 +3,11 @@ package com.teamyostrik.easystock.services.impl;
 import com.teamyostrik.easystock.dto.ClientDto;
 import com.teamyostrik.easystock.exceptions.EntityNotFoundExceptions;
 import com.teamyostrik.easystock.exceptions.ErrorCode;
+import com.teamyostrik.easystock.exceptions.InvalideOperationException;
 import com.teamyostrik.easystock.models.Client;
+import com.teamyostrik.easystock.models.CommandeClient;
 import com.teamyostrik.easystock.repository.ClientRepository;
+import com.teamyostrik.easystock.repository.CommandeClientRepository;
 import com.teamyostrik.easystock.services.ClientService;
 import com.teamyostrik.easystock.validators.ClientValidator;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +22,8 @@ import java.util.stream.Collectors;
 public class ClientServiceImpl implements ClientService {
     @Autowired
     private ClientRepository clientRepository;
+    @Autowired
+    private CommandeClientRepository commandeClientRepository;
     @Override
     public ClientDto save(ClientDto clientDto) {
         List<String> errors = ClientValidator.validate(clientDto);
@@ -59,6 +64,14 @@ public class ClientServiceImpl implements ClientService {
         {
             log.error("Entreprise ID is null");
             return;
+        }
+        List<CommandeClient> commandeClients = commandeClientRepository.findAllByClientId(id);
+        if(!commandeClients.isEmpty())
+        {
+            throw new InvalideOperationException(
+                    "impossible de supprimer un client qui a deja des commande clients",
+                    ErrorCode.CLIENT_ALRAEDY_IN_USE
+            );
         }
         clientRepository.deleteById(id);
     }

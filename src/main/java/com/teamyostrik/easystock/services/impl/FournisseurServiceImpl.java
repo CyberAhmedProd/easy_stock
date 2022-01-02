@@ -4,8 +4,13 @@ package com.teamyostrik.easystock.services.impl;
 import com.teamyostrik.easystock.dto.FournisseurDto;
 import com.teamyostrik.easystock.exceptions.EntityNotFoundExceptions;
 import com.teamyostrik.easystock.exceptions.ErrorCode;
+import com.teamyostrik.easystock.exceptions.InvalideOperationException;
+import com.teamyostrik.easystock.models.CommandeClient;
+import com.teamyostrik.easystock.models.CommandeFournisseur;
 import com.teamyostrik.easystock.models.Fournisseur;
+import com.teamyostrik.easystock.repository.CommandeFournisseurRepository;
 import com.teamyostrik.easystock.repository.FournisseurRepository;
+import com.teamyostrik.easystock.services.CommandeFournisseurService;
 import com.teamyostrik.easystock.services.FournisseurService;
 import com.teamyostrik.easystock.validators.FournisseurValidator;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +27,8 @@ import java.util.stream.Collectors;
 public class FournisseurServiceImpl implements FournisseurService {
     @Autowired
     private FournisseurRepository fournisseurRepository;
+    @Autowired
+    private CommandeFournisseurRepository commandeFournisseurRepository;
     @Override
     public FournisseurDto save(FournisseurDto fournisseurDto) {
         List<String> errors = FournisseurValidator.validate(fournisseurDto);
@@ -63,6 +70,14 @@ public class FournisseurServiceImpl implements FournisseurService {
         {
             log.error("Fournisseur ID is null");
             return;
+        }
+        List<CommandeFournisseur> commandeFournisseurs = commandeFournisseurRepository.findAllByFournisseurId(id);
+        if(!commandeFournisseurs.isEmpty())
+        {
+            throw new InvalideOperationException(
+                    "impossible de supprimer un fournisseur qui a deja des commandes fournisseurs",
+                    ErrorCode.FOURNISSEUR_ALRAEDY_IN_USE
+            );
         }
         fournisseurRepository.deleteById(id);
     }

@@ -3,6 +3,7 @@ package com.teamyostrik.easystock.services.impl;
 import com.teamyostrik.easystock.dto.*;
 import com.teamyostrik.easystock.exceptions.EntityNotFoundExceptions;
 import com.teamyostrik.easystock.exceptions.ErrorCode;
+import com.teamyostrik.easystock.exceptions.InvalideOperationException;
 import com.teamyostrik.easystock.models.*;
 import com.teamyostrik.easystock.repository.ArticleRepository;
 import com.teamyostrik.easystock.repository.LigneVenteRepository;
@@ -119,6 +120,14 @@ public class VenteServiceImpl implements VenteService {
         {
             log.error("Vente ID is NULL");
             return;
+        }
+        List<LigneVente> ligneVentes = ligneVenteRepository.findAllByVenteId(id);
+        if(!ligneVentes.isEmpty())
+        {
+            throw new InvalideOperationException(
+                    "impossible de supprimer une vente  deja utilisee",
+                    ErrorCode.VENTE_ALRAEDY_IN_USE
+            );
         }
         venteRepository.deleteById(id);
     }

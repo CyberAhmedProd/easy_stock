@@ -3,7 +3,10 @@ package com.teamyostrik.easystock.services.impl;
 import com.teamyostrik.easystock.dto.CategorieDto;
 import com.teamyostrik.easystock.exceptions.EntityNotFoundExceptions;
 import com.teamyostrik.easystock.exceptions.ErrorCode;
+import com.teamyostrik.easystock.exceptions.InvalideOperationException;
+import com.teamyostrik.easystock.models.Article;
 import com.teamyostrik.easystock.models.Categorie;
+import com.teamyostrik.easystock.repository.ArticleRepository;
 import com.teamyostrik.easystock.repository.CategorieRepository;
 import com.teamyostrik.easystock.services.CategorieService;
 import com.teamyostrik.easystock.validators.CategorieValidator;
@@ -21,6 +24,8 @@ import java.util.stream.Collectors;
 public class CategorieServiceImpl implements CategorieService {
     @Autowired
     private CategorieRepository categorieRepository;
+    @Autowired
+    private ArticleRepository articleRepository;
     @Override
     public CategorieDto save(CategorieDto categorieDto) {
         List<String> errors = CategorieValidator.validate(categorieDto);
@@ -73,6 +78,14 @@ public class CategorieServiceImpl implements CategorieService {
         {
             log.error("Categorie ID is null");
             return;
+        }
+        List<Article> articles = articleRepository.findAllByCategoryId(id);
+        if(!articles.isEmpty())
+        {
+            throw new InvalideOperationException(
+                    "Impossible de supprimer cette category qui est utilise",
+                    ErrorCode.CATEGORY_ALRAEDY_IN_USE
+            );
         }
         categorieRepository.deleteById(id);
     }

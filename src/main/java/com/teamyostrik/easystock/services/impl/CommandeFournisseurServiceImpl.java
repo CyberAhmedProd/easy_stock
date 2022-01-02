@@ -4,6 +4,7 @@ import com.teamyostrik.easystock.dto.CommandeFournisseurDto;
 import com.teamyostrik.easystock.dto.LigneCommandeFournisseurDto;
 import com.teamyostrik.easystock.exceptions.EntityNotFoundExceptions;
 import com.teamyostrik.easystock.exceptions.ErrorCode;
+import com.teamyostrik.easystock.exceptions.InvalideOperationException;
 import com.teamyostrik.easystock.models.*;
 import com.teamyostrik.easystock.repository.ArticleRepository;
 import com.teamyostrik.easystock.repository.CommandeFournisseurRepository;
@@ -126,6 +127,14 @@ public class CommandeFournisseurServiceImpl implements CommandeFournisseurServic
         {
             log.error("Commande Fournisseur ID is NULL");
             return;
+        }
+        List<LigneCommandeFournisseur> ligneCommandeFournisseurs = ligneCommandeFournisseurRepository.findAllByCommandeFournisseursId(id);
+        if(!ligneCommandeFournisseurs.isEmpty())
+        {
+            throw new InvalideOperationException(
+                    "impossible de supprimer une commande fournisseur deja utilisee",
+                    ErrorCode.COMMANDE_FOURNISSEUR_ALRAEDY_IN_USE
+            );
         }
         commandeFournisseurRepository.deleteById(id);
     }

@@ -6,7 +6,11 @@ import com.teamyostrik.easystock.dto.LigneCommandeFournisseurDto;
 import com.teamyostrik.easystock.dto.LigneVenteDto;
 import com.teamyostrik.easystock.exceptions.EntityNotFoundExceptions;
 import com.teamyostrik.easystock.exceptions.ErrorCode;
+import com.teamyostrik.easystock.exceptions.InvalideOperationException;
 import com.teamyostrik.easystock.models.Article;
+import com.teamyostrik.easystock.models.LigneCommandeClient;
+import com.teamyostrik.easystock.models.LigneCommandeFournisseur;
+import com.teamyostrik.easystock.models.LigneVente;
 import com.teamyostrik.easystock.repository.ArticleRepository;
 import com.teamyostrik.easystock.repository.LigneCommandeClientRepository;
 import com.teamyostrik.easystock.repository.LigneCommandeFournisseurRepository;
@@ -116,6 +120,33 @@ public class ArticleServiceImpl implements ArticleService {
         {
             log.error("Article ID is null");
             return;
+        }
+        List<LigneCommandeClient> ligneCommandeClients = ligneCommandeClientRepository.findAllByArticleId(id);
+        if(!ligneCommandeClients.isEmpty())
+        {
+            throw new InvalideOperationException
+                    (
+                            "impossible de supprimer un article deja utilisé dans les commandes clients",
+                            ErrorCode.ARTICLE_ALRAEDY_IN_USE
+                    );
+        }
+        List<LigneCommandeFournisseur> ligneCommandeFournisseurs = ligneCommandeFournisseurRepository.findAllByArticleId(id);
+        if(!ligneCommandeFournisseurs.isEmpty())
+        {
+            throw new InvalideOperationException
+                    (
+                            "impossible de supprimer un article deja utilisé dans les commandes fournisseurs",
+                            ErrorCode.ARTICLE_ALRAEDY_IN_USE
+                    );
+        }
+        List<LigneVente> ligneVentes = ligneVenteRepository.findAllByArticleId(id);
+        if(!ligneCommandeFournisseurs.isEmpty())
+        {
+            throw new InvalideOperationException
+                    (
+                            "impossible de supprimer un article deja utilisé dans les ventes",
+                            ErrorCode.ARTICLE_ALRAEDY_IN_USE
+                    );
         }
         articleRepository.deleteById(id);
     }
