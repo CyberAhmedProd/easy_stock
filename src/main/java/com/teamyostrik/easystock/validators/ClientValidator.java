@@ -18,6 +18,7 @@ public class ClientValidator {
             errors.add("Veuillez saisir un prénom du client");
             errors.add("Veuillez saisir un email du client");
             errors.add("Veuillez saisir le numéro du téléphone du client");
+            errors.addAll(AdresseValidator.validate(null));
             return errors;
         }
         if(!StringUtils.hasLength(clientDto.getNomClient()))
@@ -40,6 +41,8 @@ public class ClientValidator {
         {
             errors.add("Veuillez saisir un nom du client");
         }
+
+        errors.addAll(AdresseValidator.validate(clientDto.getAdresse()));
         return errors;
     }
 }

@@ -16,13 +16,24 @@ public class EntrepriseValidator {
         if(entrepriseDto == null)
         {
             errors.add("Veuillez saisir un nom de l'entreprise");
-            errors.add("Veuillez saisir un email du fournisseur");
-            errors.add("Veuillez saisir le numéro du téléphone du fournisseur");
+            errors.add("Veuillez saisir une designation de l'entreprise");
+            errors.add("Veuillez saisir un code fiscale de l'entreprise");
+            errors.add("Veuillez saisir un email de l'entreprise");
+            errors.add("Veuillez saisir un numéro de téléphone de l'entreprise");
+            errors.addAll(AdresseValidator.validate(null));
             return errors;
         }
         if(!StringUtils.hasLength(entrepriseDto.getNom()))
         {
             errors.add("Veuillez saisir un nom de l'entreprise");
+        }
+        if(!StringUtils.hasLength(entrepriseDto.getDesignation()))
+        {
+            errors.add("Veuillez saisir un designation de l'entreprise");
+        }
+        if(!StringUtils.hasLength(entrepriseDto.getCodeFiscale()))
+        {
+            errors.add("Veuillez saisir un code fiscale de l'entreprise");
         }
         if(!StringUtils.hasLength(entrepriseDto.getEmail()))
         {
@@ -30,8 +41,9 @@ public class EntrepriseValidator {
         }
         if(!StringUtils.hasLength(entrepriseDto.getNumTel()))
         {
-            errors.add("Veuillez saisir le numéro du téléphone de l'entreprise");
+            errors.add("Veuillez saisir un numéro de téléphone de l'entreprise");
         }
+       errors.addAll(AdresseValidator.validate(entrepriseDto.getAdresse()));
         return errors;
     }
 }

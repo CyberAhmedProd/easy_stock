@@ -18,6 +18,7 @@ public class UtilisateurValidator {
             errors.add("Veuillez renseigner le prénom d'utilisateur");
             errors.add("Veuillez renseigner le mot de passe d'utilisateur");
             errors.add("Veuillez renseigner l'adresse d'utilisateur");
+            errors.addAll(AdresseValidator.validate(null));
             return errors;
         }
 
@@ -38,29 +39,7 @@ public class UtilisateurValidator {
         {
             errors.add("Veuillez renseigner la date de naissance d'utilisateur");
         }
-        if(utilisateurDto.getAdresse() == null)
-        {
-            errors.add("Veuillez renseigner l'adresse de l'utilisateur");
-        }
-        else
-        {
-            if(!StringUtils.hasLength(utilisateurDto.getAdresse().getAdresse1()))
-            {
-                errors.add("le champs Vddresse 1 est obligatoire");
-            }
-            if(!StringUtils.hasLength(utilisateurDto.getAdresse().getPays()))
-            {
-                errors.add("le champs Ville est obligatoire");
-            }
-            if(!StringUtils.hasLength(utilisateurDto.getAdresse().getCodePotale()))
-            {
-                errors.add("le champs Code postale est obligatoire");
-            }
-            if(!StringUtils.hasLength(utilisateurDto.getAdresse().getPays()))
-            {
-                errors.add("le champs Pays   est obligatoire");
-            }
-        }
+        errors.addAll(AdresseValidator.validate(utilisateurDto.getAdresse()));
         return  errors;
     }
 }

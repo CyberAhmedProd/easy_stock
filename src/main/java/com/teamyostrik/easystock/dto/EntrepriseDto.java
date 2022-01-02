@@ -13,7 +13,7 @@ public class EntrepriseDto {
 
 	private Integer id;
 	private String nom;
-	
+	private String codeFiscale;
 	private String designation;
 	
 	private AdresseDto adresse;
@@ -40,6 +40,7 @@ public class EntrepriseDto {
 				.nom(entreprise.getNom())
 				.designation(entreprise.getDesignation())
 				.adresse(AdresseDto.fromEntity(entreprise.getAdresse()))
+				.codeFiscale(entreprise.getCodeFiscale())
 				.email(entreprise.getEmail())
 				.numTel(entreprise.getNumTel())
 				.siteWeb(entreprise.getSiteWeb())
@@ -60,6 +61,7 @@ public class EntrepriseDto {
 		entreprise.setNumTel(entrepriseDto.getNumTel());
 		entreprise.setSiteWeb(entrepriseDto.getSiteWeb());
 		entreprise.setEmail(entrepriseDto.getEmail());
+		entreprise.setCodeFiscale(entrepriseDto.getCodeFiscale());
 		entreprise.setAdresse(AdresseDto.toEntity(entrepriseDto.getAdresse()));
 		return entreprise;
 

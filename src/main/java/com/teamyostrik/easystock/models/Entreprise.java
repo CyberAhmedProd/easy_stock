@@ -32,6 +32,8 @@ public class Entreprise extends AbstractEntity{
 	private Adresse adresse;
 	@Column(name ="photo")
 	private String photo;
+	@Column(name ="code_fiscale")
+	private String codeFiscale;
 	@Column(name ="email")
 	private String email;
 	@Column(name = "num_tel")

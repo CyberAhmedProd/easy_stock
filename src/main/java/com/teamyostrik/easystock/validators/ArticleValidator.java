@@ -50,6 +50,8 @@ public class ArticleValidator {
             errors.add("Veuillez attribuer une categorie");
         }
 
+
+
         return errors;
     }
 }
