@@ -1,5 +1,6 @@
 package com.teamyostrik.easystock.services;
 
+import com.teamyostrik.easystock.dto.ChangerMotDePassUtilisateurDto;
 import com.teamyostrik.easystock.dto.UtilisateurDto;
 import java.util.List;
 
@@ -9,6 +10,8 @@ public interface UtilisateurService {
     UtilisateurDto findById(Integer id);
     List<UtilisateurDto> findAll();
     void delete(Integer id);
-    public UtilisateurDto findByEmail(String email);
+    UtilisateurDto findByEmail(String email);
+    UtilisateurDto changerMotDePasse(ChangerMotDePassUtilisateurDto changerMotDePassUtilisateurDto);
+
 }
 
