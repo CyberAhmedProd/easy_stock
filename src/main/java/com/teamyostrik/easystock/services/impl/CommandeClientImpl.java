@@ -1,9 +1,6 @@
 package com.teamyostrik.easystock.services.impl;
 
-import com.teamyostrik.easystock.dto.ArticleDto;
-import com.teamyostrik.easystock.dto.ClientDto;
-import com.teamyostrik.easystock.dto.CommandeClientDto;
-import com.teamyostrik.easystock.dto.LigneCommandeClientDto;
+import com.teamyostrik.easystock.dto.*;
 import com.teamyostrik.easystock.exceptions.EntityNotFoundExceptions;
 import com.teamyostrik.easystock.exceptions.ErrorCode;
 import com.teamyostrik.easystock.exceptions.InvalideOperationException;
@@ -13,6 +10,7 @@ import com.teamyostrik.easystock.repository.ClientRepository;
 import com.teamyostrik.easystock.repository.CommandeClientRepository;
 import com.teamyostrik.easystock.repository.LigneCommandeClientRepository;
 import com.teamyostrik.easystock.services.CommandeClientService;
+import com.teamyostrik.easystock.services.MouvementStockService;
 import com.teamyostrik.easystock.validators.ArticleValidator;
 import com.teamyostrik.easystock.validators.CommandeClientValidator;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +34,8 @@ public class CommandeClientImpl implements CommandeClientService {
     private ClientRepository clientRepository;
     @Autowired
     private ArticleRepository articleRepository;
-    @Override
+    @Autowired
+    private MouvementStockService mouvementStockService;
     public CommandeClientDto save(CommandeClientDto commandeClientDto) {
         List<String> errors = CommandeClientValidator.validate(commandeClientDto);
         if(!errors.isEmpty())
@@ -110,9 +109,9 @@ public class CommandeClientImpl implements CommandeClientService {
 
         CommandeClientDto commandeClientDto = checkEtatCommande(idCommande);
         commandeClientDto.setEtatCommande(etatCommande);
-        return CommandeClientDto.fromEntity(commandeClientRepository.save(
-                CommandeClientDto.toEntity(commandeClientDto)
-        ));
+        CommandeClient saveCommandeClient = commandeClientRepository.save(CommandeClientDto.toEntity(commandeClientDto));
+        updateMvtStock(idCommande);
+        return CommandeClientDto.fromEntity(saveCommandeClient);
     }
 
     @Override
@@ -278,5 +277,20 @@ public class CommandeClientImpl implements CommandeClientService {
         if(commandeClientDto.isCommandeLivree())
             throw new InvalideOperationException("Impossible de modifier la commande avec ID NULL ",ErrorCode.COMMANDE_CLIENT_NOT_MODIFIABLE);
         return commandeClientDto;
+    }
+
+    private void updateMvtStock(Integer idClient)
+    {
+        List<LigneCommandeClient> ligneCommandeClients = ligneCommandeClientRepository.findAllByCommandeClientId(idClient);
+        ligneCommandeClients.forEach(lig -> {
+            MouvementSockDto sortieStock = MouvementSockDto.builder()
+                    .article(ArticleDto.fromEnity(lig.getArticle()))
+                    .typeMouvement(TypeMouvement.SORTIE)
+                    .sourceMouvement(SourceMouvement.COMMANDE_CLIENT)
+                    .quantite(lig.getQuantite())
+                    .idEntreprise(lig.getIdEntreprise())
+                    .build();
+            mouvementStockService.sortieStock(sortieStock);
+        });
     }
 }

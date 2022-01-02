@@ -2,6 +2,7 @@ package com.teamyostrik.easystock.dto;
 
 import java.time.Instant;
 import com.teamyostrik.easystock.models.MouvementSock;
+import com.teamyostrik.easystock.models.SourceMouvement;
 import com.teamyostrik.easystock.models.TypeMouvement;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +15,8 @@ public class MouvementSockDto {
 	private Instant dateMouvement;
 	private float quantite;
 	private TypeMouvement typeMouvement;
+	private Integer idEntreprise;
+	private SourceMouvement sourceMouvement;
 
 	public static MouvementSockDto fromEntity(MouvementSock mouvementSock)
 	{
@@ -28,6 +31,8 @@ public class MouvementSockDto {
 				.typeMouvement(mouvementSock.getTypeMouvement())
 				.article(ArticleDto.fromEnity(mouvementSock.getArticle()))
 				.quantite(mouvementSock.getQuantite())
+				.idEntreprise(mouvementSock.getIdEntreprise())
+				.sourceMouvement(mouvementSock.getSourceMouvement())
 				.build();
 	}
 	public static MouvementSock toEntity(MouvementSockDto mouvementSockDto)
@@ -41,6 +46,8 @@ public class MouvementSockDto {
 		mouvementSock.setTypeMouvement(mouvementSockDto.getTypeMouvement());
 		mouvementSock.setArticle(ArticleDto.toEntity(mouvementSockDto.getArticle()));
 		mouvementSock.setDateMouvement(mouvementSockDto.getDateMouvement());
+		mouvementSock.setIdEntreprise(mouvementSockDto.getIdEntreprise());
+		mouvementSock.setSourceMouvement(mouvementSockDto.getSourceMouvement());
 		return mouvementSock;
 	}
 	

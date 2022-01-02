@@ -10,10 +10,60 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Api(Constants.APP_ROOT + "mouvement_stocks")
 public interface MouvementStockApi {
+
+    @GetMapping(value = Constants.APP_ROOT+"mouvement_stock/stock_reel/{idArticle}",produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Recherche  un mouvement de stock d'un article par IDArticle et renvoie la somme de le la quantité",notes = "Cette methode permet rechercher  un mouvement de stock d'un article par IDArticle et renvoie la somme de le la quantité", response = BigDecimal.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "la quantité est disponible dans la base des donnees"),
+            @ApiResponse(code = 404, message = "Le quantité n'existe pas dans la base des donnees avec l'ID article fourni")
+    })
+    BigDecimal stockReelArticle(@PathVariable("idArticle") Integer idArticle);
+
+    @GetMapping(value = Constants.APP_ROOT+"mouvement_stock/filter/article/{idArticle}",produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Renvoi la liste des mouvements de stock par article",notes = "Cette methode permet de rechercher et renvoyer la liste des mouvements de stock par article" +
+            "qui existent dans la base des donnees", responseContainer = "List<MouvementSockDto>")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La liste des mouvements de stock par article / une liste vide")
+    })
+    List<MouvementSockDto> mvtStockArticle(@PathVariable("idArticle") Integer idArticle);
+
+    @PostMapping(value = Constants.APP_ROOT+"mouvement_stock/entree",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Enregistrer un mouvement de stock en entree",notes = "Cette methode permet d'enregistrer ou modifier un mouvement de stock en entree", response = MouvementSockDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "L'objet mouvement de stock ene entree cree / modifie"),
+            @ApiResponse(code = 404, message = "L'objet n'est pas valide")
+    })
+    MouvementSockDto entreStock(@RequestBody MouvementSockDto mouvementSockDto);
+
+    @PostMapping(value = Constants.APP_ROOT+"mouvement_stock/sortie",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Enregistrer un mouvement de stock en sortie",notes = "Cette methode permet d'enregistrer ou modifier un mouvement de stock en sortie", response = MouvementSockDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "L'objet mouvement de stock ene sortie cree / modifie"),
+            @ApiResponse(code = 404, message = "L'objet n'est pas valide")
+    })
+    MouvementSockDto sortieStock(@RequestBody MouvementSockDto mouvementSockDto);
+
+    @PostMapping(value = Constants.APP_ROOT+"mouvement_stock/correction_postive",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Enregistrer un mouvement de stock en correction positive",notes = "Cette methode permet d'enregistrer ou modifier un mouvement de stock en correction positive", response = MouvementSockDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "L'objet mouvement de stock ene correction positive cree / modifie"),
+            @ApiResponse(code = 404, message = "L'objet n'est pas valide")
+    })
+    MouvementSockDto correctionStockPositif(@RequestBody MouvementSockDto mouvementSockDto);
+
+    @PostMapping(value = Constants.APP_ROOT+"mouvement_stock/correction_negative",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Enregistrer un mouvement de stock en correction negative",notes = "Cette methode permet d'enregistrer ou modifier un mouvement de stock en correction negative", response = MouvementSockDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "L'objet mouvement de stock ene correction negative cree / modifie"),
+            @ApiResponse(code = 404, message = "L'objet n'est pas valide")
+    })
+    MouvementSockDto correctionStockNegatif(@RequestBody MouvementSockDto mouvementSockDto);
+
 
     @PostMapping(value = Constants.APP_ROOT+"mouvement_stock",produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Enregistrer un mouvement de stock",notes = "Cette methode permet d'enregistrer ou modifier un mouvement de stock", response = MouvementSockDto.class)

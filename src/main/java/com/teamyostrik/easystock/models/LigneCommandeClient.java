@@ -33,5 +33,7 @@ public class LigneCommandeClient extends AbstractEntity{
 	
 	@Column(name = "prix_unitaire")
 	private float prixUnitiare;
+	@Column(name = "id_entreprise")
+	private Integer idEntreprise;
 	
 }

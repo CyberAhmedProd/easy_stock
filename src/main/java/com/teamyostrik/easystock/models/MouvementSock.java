@@ -34,7 +34,12 @@ public class MouvementSock extends AbstractEntity{
 	private float quantite;
 	 
 	@Column(name ="type_mouvement")
-	private TypeMouvement typeMouvement; 
+	private TypeMouvement typeMouvement;
+	@Column(name="id_entreprise")
+	private Integer idEntreprise;
+
+	@Column(name = "source_mouvement")
+	private SourceMouvement sourceMouvement;
 	
 	
 }
